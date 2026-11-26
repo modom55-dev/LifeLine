@@ -1,0 +1,145 @@
+{
+  "sourceCommit": "e0ffdeb6dc1a62ef30b0e157d1f7656ccf763de0",
+  "files": [
+    {
+      "file": "FEATURES-AND-ISSUES.md",
+      "bytes": 4015,
+      "sha256": "fb1e7620eae8ec888d8e62216ba2a388cfb7e38dbb8ce6bfa29e03780fd322e2"
+    },
+    {
+      "file": "LifeLine-Getting-Started.md",
+      "bytes": 4003,
+      "sha256": "400db27f346a70a0dc0aba8df7c5024a7b680a3b225d840f5f7847a7f136f9b8"
+    },
+    {
+      "file": "LifeLine-Project-Prompt.md",
+      "bytes": 13873,
+      "sha256": "06384be49781b9d178cd6ff99e2a200f086a084c3082f6d151d8e8f55119fe16"
+    },
+    {
+      "file": "SERVICES.md",
+      "bytes": 1142,
+      "sha256": "8ae7bb110aa08ca94bcec9f7bb3f001483be4441695bbe0b5a24c56af74623ae"
+    },
+    {
+      "file": "TAKEOVER-README.md",
+      "bytes": 7853,
+      "sha256": "3dd53e2b8a8875ec96a31706570666a7039ec468e126fa7e78b2c87929b9d936"
+    },
+    {
+      "file": "branding/08_Intro.mp4",
+      "bytes": 3171379,
+      "sha256": "303f9e8fbd67990dec0715b90183c43830a09ad82933a5290fdb1b824077befb"
+    },
+    {
+      "file": "branding/OFFICIAL-SOURCE-NOTES.md",
+      "bytes": 5335,
+      "sha256": "5c24d72ffcaa7806a9c90bc1a924c8683da729faca8e118d1991f8c59a4660fd"
+    },
+    {
+      "file": "branding/SOURCES-AND-COLORS.md",
+      "bytes": 3075,
+      "sha256": "7e5a3cacbb54497769daa7aa705e48f21a9d52aaa3cb8a6cdadb71c52269660b"
+    },
+    {
+      "file": "branding/brand-manifest.json",
+      "bytes": 1425,
+      "sha256": "372bbb70dde9ff2d61f75d26a2d4195e511cabffe36189a8a2a83f8994812372"
+    },
+    {
+      "file": "branding/fonts/cormorant-garamond/LICENSE",
+      "bytes": 4504,
+      "sha256": "732f37009943e7f4378cf37113c9bcc4716af002a8583511aa91ed5d37683e73"
+    },
+    {
+      "file": "branding/fonts/cormorant-garamond/cormorant-garamond-latin-400-normal.woff2",
+      "bytes": 22876,
+      "sha256": "8048ac209bec741e1c29cd0cfac5aac1c0c2ba8c3ddbd4a58fa9bd92ef5c63c2"
+    },
+    {
+      "file": "branding/fonts/cormorant-garamond/cormorant-garamond-latin-500-italic.woff2",
+      "bytes": 23924,
+      "sha256": "4fb55a7a6d564d428061fe12c82c896264bcc8b7f0b52840bf88e0db5b91256f"
+    },
+    {
+      "file": "branding/fonts/cormorant-garamond/cormorant-garamond-latin-500-normal.woff2",
+      "bytes": 23312,
+      "sha256": "8197bf53615ddc8c423f444c7f0eec63b7fa0ba093fcfbec60dfdd28429b0fc8"
+    },
+    {
+      "file": "branding/fonts/cormorant-garamond/cormorant-garamond-latin-600-normal.woff2",
+      "bytes": 23396,
+      "sha256": "ae062b6d5ae308e7edf61b28b07b9984bbb6e961b1f34d9b2c2f4389c33f21ea"
+    },
+    {
+      "file": "branding/fonts/cormorant-garamond/cormorant-garamond-latin-700-normal.woff2",
+      "bytes": 22340,
+      "sha256": "21a0fc1c5c22708cf4aa0c147fd32982e25bf9e21efec0ca31a4495ba41753eb"
+    },
+    {
+      "file": "branding/fonts/dm-sans/LICENSE",
+      "bytes": 4502,
+      "sha256": "6fbd040a29c2037a765dfb9f2561e9965b5c95c6dcb5dce516089d63d5f17af7"
+    },
+    {
+      "file": "branding/fonts/dm-sans/dm-sans-latin-400-normal.woff2",
+      "bytes": 14200,
+      "sha256": "4ab51eb2cd7305d177187908d6397474d4520663f6c6e572feb0a64f4fa80006"
+    },
+    {
+      "file": "branding/fonts/dm-sans/dm-sans-latin-500-normal.woff2",
+      "bytes": 14304,
+      "sha256": "19bf1984956517c35c2bd35b6cdedac12a21d6fcd3596c614ecdfb88b648909d"
+    },
+    {
+      "file": "branding/fonts/dm-sans/dm-sans-latin-600-normal.woff2",
+      "bytes": 14144,
+      "sha256": "6bb2b2645ba5eeaecf56322c543fa3a75b87b927977b9c03b1dabc4205089120"
+    },
+    {
+      "file": "branding/fonts/dm-sans/dm-sans-latin-700-normal.woff2",
+      "bytes": 14348,
+      "sha256": "35c5efa0e5daa52ee5c6500f5be354bf751fb65c4e49e1d6806c6eb5883e8fe9"
+    },
+    {
+      "file": "branding/morning-manna-reference.png",
+      "bytes": 154068,
+      "sha256": "dc09be9048b4126ea9dd9c4dd47b03736c7b726b5fc223ce9d4640728a7b09d6"
+    },
+    {
+      "file": "branding/wholelife-official-favicon.png",
+      "bytes": 15750,
+      "sha256": "2c1aaf6d044e9b7aa3ff50653927b8d5ada19abf1a37ac176fff6f9dbdaea69f"
+    },
+    {
+      "file": "branding/wholelife-official-logo.webp",
+      "bytes": 93578,
+      "sha256": "5993af1a6e760eedc9b57e1142fa57139b61812e5b557351f90ef60596a6aa5f"
+    },
+    {
+      "file": "data/wholelife-current-bulletin.json",
+      "bytes": 4371,
+      "sha256": "38e492b1d54bcf346289bdb42263c695a8170960426ff75e159bcb1b90e60ca4"
+    },
+    {
+      "file": "screenshots/lifeline-mobile-access.png",
+      "bytes": 73759,
+      "sha256": "812eaa555bbed5401ee09f0e83e00756c4ae4c086a8fcf76bf4364b3089b2268"
+    },
+    {
+      "file": "screenshots/lifeline-published-desktop.webp",
+      "bytes": 98772,
+      "sha256": "9d34935df9f8e8d85749210cfd73cd460052106c5a6dd8a54d025dee25ffb80a"
+    },
+    {
+      "file": "screenshots/wholelife-ministry-reference.webp",
+      "bytes": 103724,
+      "sha256": "5bd8df9fbd983464b86c8c15116b3c9b98f0cf54e684e2d23d803ceb1f5b0397"
+    },
+    {
+      "file": "source/lifeline-source.zip",
+      "bytes": 830298,
+      "sha256": "aadf8f660f2b09e4a80d677359aa4bc14f4a9cfa95e831cddfda9d6418511dad"
+    }
+  ]
+}
