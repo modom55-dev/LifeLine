@@ -1,0 +1,111 @@
+{
+  "formatVersion": 1,
+  "exportedAt": "2026-11-26T15:35:33.067Z",
+  "sourceVersion": "e0ffdeb6dc1a62ef30b0e157d1f7656ccf763de0",
+  "church": {
+    "slug": "wholelife",
+    "name": "WholeLife Community Church",
+    "location": "Totowa, NJ",
+    "serviceTime": "11:00 AM",
+    "address": "105 Church Street, Totowa, NJ 07512",
+    "website": "https://www.wholelifechurch.org/"
+  },
+  "bulletin": {
+    "draft": {
+      "announcements": [
+        {
+          "body": "New to the community? This sample announcement invites you to connect with the welcome team after the service.",
+          "id": "welcome",
+          "title": "A place for everyone"
+        },
+        {
+          "body": "Sample opportunity: lend a hand with our community care team. Details will be confirmed by church leadership.",
+          "id": "serve",
+          "title": "Small acts. Lasting difference."
+        },
+        {
+          "body": "Sample reminder: families can ask the welcome team about children's activities and gathering spaces.",
+          "id": "families",
+          "title": "Growing together"
+        }
+      ],
+      "events": [
+        {
+          "date": "2026-12-06",
+          "description": "A sample gathering to share a meal and get to know one another. Not a confirmed church event.",
+          "id": "gather",
+          "location": "Sample gathering space",
+          "time": "After the service",
+          "title": "Community table"
+        },
+        {
+          "date": "2026-12-12",
+          "description": "Sample community care event. Date, location and participation details are illustrative only.",
+          "id": "care",
+          "location": "Location to be confirmed",
+          "time": "9:00 AM",
+          "title": "A morning of service"
+        }
+      ],
+      "givingUrl": "",
+      "livestreamUrl": "",
+      "sampleData": true,
+      "scripture": "Colossians 2:6–7",
+      "sermonSummary": "This sample message invites us to slow down, notice the goodness around us, and let gratitude shape the way we live together.",
+      "sermonTitle": "A life rooted in gratitude",
+      "serviceDate": "2026-11-29",
+      "serviceTime": "11:00 AM",
+      "speaker": "Sample speaker"
+    },
+    "published": {
+      "announcements": [
+        {
+          "body": "New to the community? This sample announcement invites you to connect with the welcome team after the service.",
+          "id": "welcome",
+          "title": "A place for everyone"
+        },
+        {
+          "body": "Sample opportunity: lend a hand with our community care team. Details will be confirmed by church leadership.",
+          "id": "serve",
+          "title": "Small acts. Lasting difference."
+        },
+        {
+          "body": "Sample reminder: families can ask the welcome team about children's activities and gathering spaces.",
+          "id": "families",
+          "title": "Growing together"
+        }
+      ],
+      "events": [
+        {
+          "date": "2026-12-06",
+          "description": "A sample gathering to share a meal and get to know one another. Not a confirmed church event.",
+          "id": "gather",
+          "location": "Sample gathering space",
+          "time": "After the service",
+          "title": "Community table"
+        },
+        {
+          "date": "2026-12-12",
+          "description": "Sample community care event. Date, location and participation details are illustrative only.",
+          "id": "care",
+          "location": "Location to be confirmed",
+          "time": "9:00 AM",
+          "title": "A morning of service"
+        }
+      ],
+      "givingUrl": "",
+      "livestreamUrl": "",
+      "sampleData": true,
+      "scripture": "Colossians 2:6–7",
+      "sermonSummary": "This sample message invites us to slow down, notice the goodness around us, and let gratitude shape the way we live together.",
+      "sermonTitle": "A life rooted in gratitude",
+      "serviceDate": "2026-11-29",
+      "serviceTime": "11:00 AM",
+      "speaker": "Sample speaker"
+    },
+    "revision": 2,
+    "savedAt": "2026-11-26T14:07:00.266Z",
+    "publishedAt": "2026-11-26T14:07:00.266Z"
+  },
+  "exclusions": "No user accounts, owner IDs, activation-key hashes, invitation tokens/hashes, session cookies, database credentials or browser-local notes are included. This is an application-content export, not a full database backup."
+}

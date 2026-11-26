@@ -1,0 +1,3286 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/500.css";
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/cormorant-garamond/500-italic.css";
+@import "@fontsource/dm-sans/400.css";
+@import "@fontsource/dm-sans/500.css";
+@import "@fontsource/dm-sans/600.css";
+@import "@fontsource/dm-sans/700.css";
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--foreground);
+  --color-accent: var(--muted);
+  --color-accent-foreground: var(--foreground);
+  --color-ring: var(--gold);
+  --radius-lg: 10px;
+}
+:root {
+  --navy: #14283f;
+  --silver: #c8d1db;
+  --gold: #d6bd87;
+  --warm: #faf9f6;
+  --background: #faf9f6;
+  --foreground: #14283f;
+  --border: #e4e5e4;
+  --primary: #14283f;
+  --primary-foreground: #fff;
+  --muted: #f0f1ef;
+  --muted-foreground: #6a7582;
+  --popover: #fff;
+  --radius: 10px;
+  font-synthesis: none;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: "DM Sans", sans-serif;
+  color: var(--navy);
+  background: var(--warm);
+  font-size: 14px;
+  line-height: 1.6;
+}
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+button,
+a,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+a {
+  transition:
+    background 0.16s,
+    color 0.16s,
+    transform 0.16s;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+h1,
+h2 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  line-height: 1.08;
+}
+h3 {
+  line-height: 1.4;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--gold);
+  border-color: var(--gold);
+}
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 1.7px;
+  font-weight: 700;
+  line-height: 1.5;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.muted {
+  color: #6b7682;
+  line-height: 1.75;
+}
+.fine-print {
+  font-size: 11px;
+  color: #74808b;
+  line-height: 1.7;
+}
+.gold-text {
+  color: var(--gold);
+}
+.center {
+  text-align: center;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 43px;
+  padding: 10px 17px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.primary {
+  background: var(--navy);
+  color: #fff;
+}
+.primary:hover:not(:disabled) {
+  background: #263f5a;
+}
+.secondary {
+  background: #fff;
+  border-color: #dce0e3;
+  color: var(--navy);
+}
+.secondary:hover:not(:disabled) {
+  background: #f0f2f2;
+  border-color: var(--silver);
+}
+.wide {
+  width: 100%;
+}
+.button-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.text-button {
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 600;
+}
+.text-button:hover {
+  color: #8c7139;
+}
+.icon-button {
+  border: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  padding: 8px;
+  border-radius: 5px;
+  color: inherit;
+}
+.icon-button:hover {
+  background: #14283f0a;
+}
+.spin {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.loading-state {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px;
+  text-align: center;
+}
+.loading-state h2 {
+  font-size: 35px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
+}
+.brand-mark {
+  color: var(--gold);
+  display: flex;
+}
+.wordmark {
+  display: block;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 26px;
+  letter-spacing: -0.7px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+.wordmark span {
+  font-weight: 400;
+}
+.brand-byline {
+  display: block;
+  font-size: 7px;
+  letter-spacing: 1.7px;
+  margin-top: 5px;
+  font-weight: 500;
+}
+.pilot-chip {
+  font-size: 9px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  background: #eee9dc;
+  border: 1px solid #e4dac4;
+  padding: 5px 9px;
+  border-radius: 4px;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  color: #736040;
+  white-space: nowrap;
+}
+.sample-dot {
+  width: 5px;
+  height: 5px;
+  background: #a88748;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.small-divider {
+  height: 12px;
+  width: 1px;
+  background: #ccd2d8;
+  display: inline-block;
+  margin: 0 10px;
+  vertical-align: middle;
+}
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6f9f93;
+  display: inline-block;
+}
+.status-dot.amber {
+  background: #ac8a46;
+}
+/* Owner workspace */
+.workspace {
+  display: flex;
+  min-height: 100vh;
+}
+.sidebar {
+  width: 246px;
+  position: fixed;
+  inset: 0 auto 0 0;
+  background: var(--navy);
+  color: #fff;
+  padding: 32px 22px 15px;
+  display: flex;
+  flex-direction: column;
+  z-index: 30;
+}
+.sidebar .brand {
+  margin: 0 0 30px;
+}
+.sidebar .wordmark {
+  font-size: 25px;
+}
+.sidebar .brand-byline {
+  color: #b9c5d1;
+  font-size: 6px;
+}
+.church-switcher {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: #ffffff06;
+  border: 1px solid #ffffff17;
+  border-radius: 6px;
+  padding: 12px 10px;
+  margin-bottom: 35px;
+}
+.church-avatar {
+  background: #d6bd871a;
+  border: 1px solid #d6bd8730;
+  color: var(--gold);
+  width: 30px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  font-family: "Cormorant Garamond";
+  font-size: 22px;
+}
+.church-switcher strong {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+}
+.church-switcher span:not(.church-avatar) {
+  display: block;
+  font-size: 9px;
+  color: #9eafbe;
+  margin-top: 2px;
+}
+.church-switcher > svg {
+  margin-left: auto;
+  color: #8799aa;
+}
+.nav-eyebrow {
+  font-size: 8px;
+  letter-spacing: 1.9px;
+  color: #91a3b5;
+  font-weight: 600;
+  padding-left: 12px;
+  margin-bottom: 15px;
+}
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  padding: 12px 13px;
+  border-radius: 5px;
+  color: #b7c4d1;
+  border-left: 2px solid transparent;
+}
+.sidebar nav a:hover {
+  background: #ffffff07;
+  color: #fff;
+}
+.sidebar nav a.active {
+  background: #ffffff0c;
+  color: var(--gold);
+  border-left-color: var(--gold);
+}
+.nav-dot {
+  width: 4px;
+  height: 4px;
+  background: #99a7b5;
+  border-radius: 50%;
+  margin-left: auto;
+}
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 35px;
+}
+.pilot-sidebar-card {
+  border: 1px solid #ffffff14;
+  background: #ffffff03;
+  border-radius: 7px;
+  padding: 15px 13px;
+  margin-bottom: 23px;
+}
+.pilot-sidebar-card > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #d4dce4;
+}
+.pilot-sidebar-card > span svg {
+  color: var(--gold);
+}
+.pilot-sidebar-card p {
+  font-size: 9px;
+  color: #91a4b6;
+  line-height: 1.8;
+  margin: 10px 0;
+}
+.pilot-sidebar-card a {
+  font-size: 9px;
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+}
+.sidebar-help {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #a6b6c6;
+  font-size: 11px;
+  padding: 8px 11px;
+  background: none;
+  border: 0;
+  width: 100%;
+}
+.owner-profile {
+  border-top: 1px solid #ffffff15;
+  margin-top: 20px;
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.owner-profile > span:first-child {
+  width: 32px;
+  height: 32px;
+  background: #304258;
+  border: 1px solid #ffffff1a;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  color: #c5d2de;
+}
+.owner-profile strong {
+  font-size: 10px;
+  font-weight: 500;
+  display: block;
+}
+.owner-profile small {
+  font-size: 8px;
+  color: #95a7ba;
+  display: block;
+}
+.owner-dot {
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  background: #80a494;
+  margin-left: auto;
+}
+.workspace-body {
+  margin-left: 246px;
+  width: calc(100% - 246px);
+  display: flex;
+  flex-direction: column;
+}
+.workspace-header {
+  height: 73px;
+  border-bottom: 1px solid #e4e6e7;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 39px;
+  gap: 14px;
+}
+.workspace-header > div {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.header-church {
+  font-size: 11px;
+  font-weight: 600;
+}
+.header-separator {
+  width: 1px;
+  height: 14px;
+  background: #ddd;
+}
+.header-location,
+.header-service {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: #74808c;
+}
+.sample-banner {
+  padding: 10px 39px;
+  background: #f3eee3;
+  border-bottom: 1px solid #e8e1d4;
+  font-size: 9px;
+  color: #81745d;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.sample-banner > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sample-banner strong {
+  font-weight: 600;
+  color: #6e614d;
+}
+.workspace-main {
+  padding: 38px 39px 32px;
+  max-width: 1500px;
+  width: 100%;
+  margin: auto;
+  flex: 1;
+}
+.page-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+.page-heading > .button {
+  align-self: center;
+}
+.page-heading .eyebrow {
+  color: #8a7857;
+  font-size: 9px;
+}
+.page-heading h1 {
+  font-size: 49px;
+  letter-spacing: -1px;
+  margin: 9px 0 9px;
+}
+.page-heading p {
+  color: #75808a;
+  font-size: 11px;
+}
+.overview-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(265px, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+.overview-left {
+  min-width: 0;
+}
+.sunday-card {
+  background: var(--navy);
+  padding: 26px 29px 22px;
+  border-radius: 8px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  min-height: 264px;
+}
+.sunday-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+.sunday-card-top .eyebrow {
+  font-size: 8px;
+  letter-spacing: 1.9px;
+  color: #c3af85;
+}
+.light-status {
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #d4e1dd;
+  border: 1px solid #ffffff20;
+  background: #ffffff05;
+  border-radius: 4px;
+  padding: 3px 7px;
+}
+.sunday-date {
+  color: #bdcad7;
+  font-size: 10px;
+  margin-top: 24px;
+  position: relative;
+  z-index: 1;
+}
+.sunday-date span {
+  color: #9baebf;
+  white-space: nowrap;
+}
+.sunday-card h2 {
+  font-size: 41px;
+  line-height: 1.06;
+  letter-spacing: -0.5px;
+  margin: 12px 0 10px;
+  max-width: 350px;
+  position: relative;
+  z-index: 1;
+}
+.sunday-scripture {
+  font-size: 12px;
+  color: var(--gold);
+  position: relative;
+  z-index: 1;
+}
+.sunday-card-bottom {
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px solid #ffffff16;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+.sample-pill {
+  background: #d6bd8710;
+  border: 1px solid #d6bd8740;
+  border-radius: 3px;
+  padding: 3px 6px;
+  font-size: 7px;
+  letter-spacing: 1px;
+  color: #d6bd87;
+}
+.sunday-card-bottom a {
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #d7dfe6;
+}
+.card-watermark {
+  position: absolute;
+  right: -35px;
+  bottom: 58px;
+  color: #ffffff04;
+  transform: rotate(-6deg);
+}
+.status-cards {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+.status-cards > div {
+  background: #fff;
+  border: 1px solid #e3e5e5;
+  border-radius: 7px;
+  padding: 19px 20px;
+  flex: 1;
+  position: relative;
+}
+.status-card-icon {
+  position: absolute;
+  right: 17px;
+  top: 20px;
+  color: #91a0ac;
+}
+.status-cards .eyebrow {
+  font-size: 8px;
+  letter-spacing: 1.4px;
+  color: #8b96a0;
+}
+.status-cards h3 {
+  font-family: "Cormorant Garamond";
+  font-size: 26px;
+  font-weight: 500;
+  margin: 7px 0 4px;
+}
+.status-cards p {
+  font-size: 9px;
+  color: #818c97;
+}
+.workspace-section {
+  margin-top: 27px;
+}
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.workspace-section .section-heading h2 {
+  font-size: 25px;
+}
+.workspace-section .section-heading .text-button {
+  font-size: 9px;
+}
+.detail-list {
+  margin-top: 17px;
+  background: #fff;
+  border: 1px solid #e2e5e5;
+  border-radius: 7px;
+  overflow: hidden;
+}
+.detail-list a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-bottom: 1px solid #ebeded;
+}
+.detail-list a:last-child {
+  border: 0;
+}
+.detail-list a:hover {
+  background: #fafaf8;
+}
+.detail-icon {
+  background: #f1f3f3;
+  border: 1px solid #e9ebeb;
+  border-radius: 5px;
+  width: 36px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: #6b7b8b;
+}
+.detail-list a > div {
+  min-width: 0;
+}
+.detail-list strong {
+  font-size: 11px;
+  font-weight: 500;
+  display: block;
+}
+.detail-list span:not(.detail-icon) {
+  display: block;
+  font-size: 9px;
+  color: #88919a;
+  margin-top: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.detail-list a > svg {
+  margin-left: auto;
+  color: #a2acb5;
+  flex-shrink: 0;
+}
+.last-saved {
+  font-size: 8px;
+  color: #8a939c;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+}
+.last-saved > span {
+  margin-left: auto;
+}
+.member-preview-card {
+  background: #fff;
+  border: 1px solid #e3e5e5;
+  border-radius: 8px;
+  padding: 23px 24px;
+}
+.member-preview-card .eyebrow {
+  font-size: 8px;
+  letter-spacing: 1.3px;
+  color: #89939c;
+}
+.tiny-pill {
+  font-size: 6px;
+  letter-spacing: 0.7px;
+  padding: 3px 6px;
+  background: #f2f3f1;
+  color: #81897e;
+  border-radius: 3px;
+}
+.member-preview-card h2 {
+  font-size: 31px;
+  margin: 18px 0 10px;
+}
+.member-preview-card > .muted {
+  font-size: 10px;
+  line-height: 1.8;
+}
+.phone-preview {
+  background: #fff;
+  border: 5px solid #263748;
+  border-radius: 27px;
+  max-width: 225px;
+  margin: 25px auto 22px;
+  height: 377px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 20px #14283f0d;
+}
+.phone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 12px;
+  width: 80px;
+  background: #263748;
+  border-radius: 0 0 10px 10px;
+  z-index: 2;
+}
+.phone-content {
+  padding: 22px 17px;
+  background: var(--warm);
+  min-height: 100%;
+}
+.phone-brand {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-family: "Cormorant Garamond";
+  font-weight: 600;
+  font-size: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ddd;
+}
+.phone-brand svg {
+  color: #9e874e;
+}
+.phone-sample {
+  font-size: 5px;
+  letter-spacing: 1.1px;
+  color: #927b4c;
+  display: block;
+  margin: 12px 0;
+}
+.phone-content .eyebrow {
+  font-size: 5px;
+  letter-spacing: 0.8px;
+}
+.phone-content h3 {
+  font-family: "Cormorant Garamond";
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.02;
+  margin: 7px 0;
+}
+.phone-meta {
+  font-size: 6px;
+  color: #8b949c;
+}
+.phone-rule {
+  height: 1px;
+  background: #deded9;
+  margin: 15px 0;
+}
+.phone-content h4 {
+  font-family: "Cormorant Garamond";
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1.08;
+  margin: 7px 0 8px;
+}
+.phone-scripture {
+  font-size: 7px;
+  color: #8d794c;
+}
+.phone-summary {
+  font-size: 6px;
+  line-height: 1.9;
+  color: #7b858e;
+  margin-top: 9px;
+}
+.phone-content h5 {
+  font-family: "Cormorant Garamond";
+  font-size: 15px;
+  margin: 0;
+  font-weight: 600;
+}
+.member-preview-card > .button {
+  font-size: 10px;
+  min-height: 40px;
+}
+.bottom-note {
+  margin-top: 28px;
+  border: 1px solid #e2dfd7;
+  background: #f5f3ed;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 19px 22px;
+}
+.bottom-note-icon {
+  color: #8d805e;
+  display: flex;
+}
+.bottom-note strong {
+  font-family: "Cormorant Garamond";
+  font-size: 22px;
+  font-weight: 500;
+}
+.bottom-note p {
+  font-size: 9px;
+  color: #8b877c;
+  margin-top: 2px;
+}
+.bottom-note > a {
+  margin-left: auto;
+  font-size: 9px;
+  flex-shrink: 0;
+}
+.workspace-footer {
+  padding: 20px 39px 22px;
+  border-top: 1px solid #e7e7e3;
+  display: flex;
+  justify-content: space-between;
+  color: #9299a0;
+  font-size: 8px;
+}
+.workspace-footer > span:last-child {
+  font-size: 6px;
+  letter-spacing: 1px;
+}
+.footer-divider {
+  display: inline-block;
+  width: 1px;
+  height: 8px;
+  background: #cdd1d4;
+  margin: 0 9px;
+}
+.mobile-menu-button,
+.sidebar-close {
+  display: none;
+}
+/* Editor and owner tools */
+label {
+  font-size: 11px;
+  font-weight: 500;
+  display: block;
+  margin: 18px 0;
+  color: #4d5d6d;
+}
+input,
+textarea {
+  display: block;
+  width: 100%;
+  margin-top: 7px;
+  background: #fff;
+  border: 1px solid #dce0e3;
+  border-radius: 5px;
+  padding: 11px 13px;
+  font-size: 12px;
+  color: var(--navy);
+  line-height: 1.6;
+}
+input::placeholder,
+textarea::placeholder {
+  color: #a1aab2;
+  font-weight: 400;
+}
+textarea {
+  resize: vertical;
+  min-height: 78px;
+}
+.optional {
+  font-size: 9px;
+  font-weight: 400;
+  color: #8b96a0;
+  margin-left: 7px;
+}
+.required {
+  color: #997c45;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.form-grid label {
+  margin-bottom: 0;
+}
+.form-card {
+  background: #fff;
+  border: 1px solid #e0e4e5;
+  border-radius: 8px;
+  padding: 26px 28px;
+  margin-bottom: 22px;
+}
+.form-card > h2 {
+  font-size: 31px;
+  margin-bottom: 14px;
+}
+.form-card > h3 {
+  font-size: 14px;
+  margin: 22px 0 10px;
+}
+.form-card > p,
+.form-card form > p {
+  font-size: 12px;
+  color: #71808d;
+  margin-bottom: 14px;
+  line-height: 1.8;
+}
+.form-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #e8eaeb;
+  padding-bottom: 18px;
+  margin-bottom: 16px;
+}
+.form-card-heading > svg {
+  color: #8f9aa3;
+}
+.form-card-heading h2 {
+  font-size: 26px;
+}
+.form-card-heading > span {
+  margin-left: auto;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: #a3a8aa;
+}
+.editor-status {
+  border: 1px solid #e1e3e1;
+  border-radius: 6px;
+  padding: 11px 16px;
+  background: #f2f3ef;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin: -6px 0 24px;
+  font-size: 10px;
+  color: #758379;
+}
+.editor-status > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.editor-status > span:nth-child(2) {
+  margin-left: auto;
+  font-size: 9px;
+  color: #8a939a;
+}
+.editor-status .text-button {
+  margin-left: auto;
+  font-size: 10px;
+}
+.editor-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 26px;
+}
+.editor-aside {
+  position: sticky;
+  top: 20px;
+  align-self: start;
+}
+.aside-note {
+  background: #f0eee6;
+  border: 1px solid #e1dccf;
+  border-radius: 8px;
+  padding: 25px 26px;
+  color: #6e674f;
+}
+.aside-note > .eyebrow {
+  font-size: 8px;
+  letter-spacing: 1.3px;
+}
+.aside-note h2 {
+  font-size: 33px;
+  color: var(--navy);
+  margin: 15px 0 20px;
+}
+.aside-note ol {
+  padding-left: 20px;
+  margin: 0;
+}
+.aside-note li {
+  padding-left: 8px;
+  margin: 20px 0;
+  font-family: "Cormorant Garamond";
+  font-size: 22px;
+}
+.aside-note li strong {
+  font-family: "DM Sans";
+  font-size: 11px;
+  display: block;
+  font-weight: 500;
+  color: #52616b;
+}
+.aside-note li span {
+  font-family: "DM Sans";
+  font-size: 10px;
+  line-height: 1.8;
+  display: block;
+  color: #8a8a7b;
+  margin-top: 5px;
+}
+.aside-note > p {
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 16px 0;
+  color: #7f806f;
+}
+.quiet-card {
+  display: flex;
+  gap: 13px;
+  background: #f0f2f1;
+  border: 1px solid #e2e6e3;
+  border-radius: 7px;
+  padding: 20px;
+  margin: 21px 0;
+  color: #72817f;
+}
+.quiet-card > svg {
+  flex-shrink: 0;
+  color: #8a998f;
+  margin-top: 3px;
+}
+.quiet-card p {
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 0 0 9px;
+}
+.quiet-card p:last-child {
+  margin-bottom: 0;
+}
+.quiet-card strong,
+.quiet-card h3 {
+  color: #536a63;
+  font-size: 11px;
+}
+.quiet-card h3 {
+  margin-bottom: 7px;
+}
+.editable-item {
+  border-bottom: 1px solid #e9ebed;
+  padding: 6px 0 15px;
+  margin-bottom: 15px;
+}
+.item-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 8px;
+  letter-spacing: 1.2px;
+  color: #a2a8ad;
+}
+.editable-item label {
+  margin: 13px 0;
+}
+.add-button {
+  background: #f5f6f5;
+  border: 1px dashed #cfd6da;
+  width: 100%;
+  color: #7b8995;
+  font-size: 11px;
+}
+.validation-errors {
+  display: flex;
+  gap: 15px;
+  background: #fcf0eb;
+  border: 1px solid #eacdc2;
+  padding: 18px;
+  border-radius: 7px;
+  color: #914831;
+  margin: 0 0 24px;
+}
+.validation-errors p {
+  font-size: 11px;
+  margin: 5px 0;
+}
+.validation-errors strong {
+  font-size: 12px;
+}
+.cc-dialog {
+  background: #fff;
+  max-width: 580px;
+  padding: 32px !important;
+  border: 1px solid #dce0e3;
+  border-radius: 10px;
+  color: var(--navy);
+}
+.modal-close {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+}
+.modal-title {
+  font-family: "Cormorant Garamond";
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 6px 22px 10px 0;
+}
+.cc-dialog > .muted {
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+.newsletter-text {
+  font-family: monospace;
+  font-size: 11px;
+  min-height: 320px;
+  margin: 15px 0 20px;
+  background: #fafaf8;
+}
+.publish-summary {
+  background: #f7f5ef;
+  border: 1px solid #e6e1d6;
+  border-radius: 7px;
+  padding: 22px;
+  margin: 20px 0;
+}
+.publish-summary h3 {
+  font-family: "Cormorant Garamond";
+  font-size: 30px;
+  font-weight: 500;
+  margin: 12px 0 8px;
+}
+.publish-summary p {
+  font-size: 12px;
+  color: #8b7c63;
+}
+.publish-summary .eyebrow {
+  font-size: 8px;
+  color: #9b865b;
+}
+.sharing-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) 1.4fr;
+  gap: 28px;
+}
+.qr-card {
+  text-align: center;
+  align-self: start;
+  padding: 35px 22px;
+}
+.qr-card > .eyebrow {
+  color: #9a865e;
+  font-size: 9px;
+}
+.qr-card > h2 {
+  font-size: 39px;
+  margin: 15px 0 25px;
+}
+.qr-card > h3 {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 20px 0 5px;
+}
+.qr-card > p {
+  font-size: 11px;
+  margin-bottom: 23px;
+}
+.qr-wrap {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #e9e5d9;
+  border-radius: 8px;
+  padding: 6px;
+}
+.qr-card > .fine-print {
+  display: block;
+  margin-top: 14px;
+}
+.sharing-grid .form-card p {
+  font-size: 11px;
+}
+.access-management-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 0.9fr;
+  gap: 28px;
+}
+.large-status {
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #74837a;
+}
+.created-invite {
+  background: #f3f6f2;
+  border: 1px solid #dbe5d9;
+  border-radius: 7px;
+  padding: 20px;
+  margin-top: 27px;
+}
+.created-invite .eyebrow {
+  color: #788770;
+  font-size: 8px;
+}
+.created-invite h3 {
+  font-family: "Cormorant Garamond";
+  font-size: 27px;
+  margin: 10px 0;
+}
+.created-invite details {
+  font-size: 10px;
+  margin: 15px 0;
+  color: #71806c;
+}
+.created-invite .fine-print {
+  margin-top: 15px;
+}
+.invitation-list {
+  margin-top: 10px;
+}
+.invitation-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 0;
+  border-bottom: 1px solid #ebeded;
+}
+.invitation-row:last-child {
+  border-bottom: 0;
+}
+.invitation-row strong {
+  font-size: 12px;
+  font-weight: 500;
+}
+.invitation-row p {
+  font-size: 10px;
+  color: #89939c;
+  margin-top: 5px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.invitation-status {
+  font-size: 9px;
+  border: 1px solid #d9e3d9;
+  padding: 3px 9px;
+  background: #f1f5f0;
+  color: #778570;
+  border-radius: 4px;
+  margin-left: auto;
+}
+.invitation-status.inactive {
+  background: #f4f3f1;
+  color: #94938a;
+  border-color: #e4e2dd;
+}
+.invitation-row > .text-button {
+  font-size: 10px;
+  margin-left: 10px;
+}
+.empty-invites {
+  text-align: center;
+  padding: 35px;
+  color: #8e9a94;
+}
+.empty-invites h3 {
+  font-family: "Cormorant Garamond";
+  font-size: 27px;
+  font-weight: 500;
+  margin: 13px 0 5px;
+  color: #687b72;
+}
+.empty-invites p {
+  font-size: 11px;
+}
+.guide-content {
+  max-width: 820px;
+}
+.guide-steps {
+  padding-left: 20px;
+}
+.guide-steps li {
+  margin: 25px 0;
+  padding-left: 10px;
+  color: #89917e;
+}
+.guide-steps strong {
+  font-size: 13px;
+  color: var(--navy);
+}
+.guide-steps p {
+  font-size: 12px;
+  color: #78848e;
+  margin-top: 5px;
+  line-height: 1.9;
+}
+.draft-document {
+  max-width: 820px;
+  background: white;
+  margin: auto;
+  border: 1px solid #e0e3e4;
+  border-radius: 8px;
+  padding: 16px 40px;
+}
+/* Access */
+.access-layout {
+  display: grid;
+  grid-template-columns: 46% 54%;
+  min-height: 100vh;
+}
+.access-story {
+  background: var(--navy);
+  color: #fff;
+  padding: 44px 55px 29px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.access-story .brand {
+  position: relative;
+  z-index: 1;
+}
+.access-story .wordmark {
+  font-size: 31px;
+}
+.access-story .brand-byline {
+  font-size: 7px;
+  color: #bbc5d0;
+}
+.access-story-main {
+  margin: auto 0;
+  padding: 65px 0 40px;
+}
+.access-story-main > .eyebrow {
+  font-size: 10px;
+}
+.access-story h1 {
+  font-size: 70px;
+  letter-spacing: -1.5px;
+  line-height: 1.02;
+  margin: 26px 0;
+}
+.access-story em {
+  color: var(--gold);
+  font-weight: 500;
+}
+.story-rule {
+  width: 44px;
+  height: 1px;
+  background: var(--gold);
+  margin: 30px 0 21px;
+}
+.access-story-main > p {
+  font-size: 12px;
+  color: #b6c1ce;
+  line-height: 1.9;
+}
+.access-church {
+  border-top: 1px solid #ffffff1b;
+  padding-top: 26px;
+  margin-top: 45px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.access-church > svg {
+  color: var(--gold);
+}
+.access-church strong {
+  font-size: 12px;
+  font-weight: 500;
+  display: block;
+}
+.access-church span {
+  font-size: 10px;
+  color: #9caec0;
+  display: block;
+  margin-top: 4px;
+}
+.access-story > footer {
+  font-size: 8px;
+  color: #8e9eb0;
+  letter-spacing: 1.3px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+.access-story > footer > span {
+  font-size: 7px;
+}
+.access-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 50px 65px;
+  position: relative;
+}
+.access-main > .pilot-chip {
+  align-self: flex-end;
+  position: absolute;
+  top: 40px;
+  right: 45px;
+}
+.access-card {
+  max-width: 420px;
+  width: 100%;
+  padding: 40px 0;
+}
+.access-card > .eyebrow {
+  color: #a18d66;
+  font-size: 9px;
+}
+.access-card > h2 {
+  font-size: 54px;
+  letter-spacing: -0.9px;
+  margin: 15px 0 20px;
+}
+.access-card > .muted {
+  font-size: 12px;
+}
+.segmented {
+  display: flex;
+  border: 1px solid #dedfdb;
+  border-radius: 6px;
+  background: #f0f1ed;
+  padding: 4px;
+  margin: 28px 0 23px;
+  gap: 4px;
+}
+.segmented button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1;
+  background: transparent;
+  border: 0;
+  padding: 9px 12px;
+  color: #85909a;
+  font-size: 11px;
+  border-radius: 4px;
+}
+.segmented button.active {
+  background: #fff;
+  color: var(--navy);
+  box-shadow: 0 1px 4px #14283f09;
+}
+.access-form h3 {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 10px 0;
+}
+.access-form .muted {
+  font-size: 11px;
+  margin-bottom: 20px;
+}
+.access-form .wide {
+  margin-top: 20px;
+  justify-content: space-between;
+  padding: 13px 18px;
+}
+.access-form label {
+  font-size: 10px;
+}
+.access-form .text-button {
+  margin-top: 15px;
+}
+.privacy-line {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: #8c998d;
+  font-size: 9px;
+  padding-top: 22px;
+  margin-top: 30px;
+  border-top: 1px solid #e2e4df;
+  line-height: 1.9;
+}
+.access-bottom {
+  color: #a0a6a6;
+  font-size: 7px;
+  letter-spacing: 1.4px;
+  position: absolute;
+  bottom: 27px;
+}
+/* Congregation document */
+.member-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  padding: 20px 45px;
+  background: #fff;
+  border-bottom: 1px solid #e4e5e2;
+}
+.member-header .brand {
+  color: var(--navy);
+}
+.member-header-actions {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+.member-main {
+  max-width: 860px;
+  margin: auto;
+  padding: 32px 45px 50px;
+}
+.member-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 15px;
+}
+.member-toolbar > .eyebrow {
+  font-size: 9px;
+  color: #9d8c67;
+}
+.member-toolbar .button {
+  font-size: 10px;
+  min-height: 37px;
+  padding: 9px 13px;
+}
+.sample-notice {
+  padding: 12px 16px;
+  background: #f2eee3;
+  border: 1px solid #e7dfcf;
+  border-radius: 4px;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #8d7850;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 32px;
+  font-weight: 600;
+}
+.sample-notice > span:last-child {
+  font-size: 9px;
+  letter-spacing: 0;
+  font-weight: 400;
+  margin-left: auto;
+}
+.bulletin-intro {
+  text-align: center;
+  padding: 13px 0 36px;
+}
+.bulletin-intro > .eyebrow {
+  color: #958258;
+  font-size: 9px;
+}
+.bulletin-intro h1 {
+  font-size: 52px;
+  margin: 15px 0;
+  max-width: 630px;
+  margin-left: auto;
+  margin-right: auto;
+  letter-spacing: -0.7px;
+}
+.bulletin-intro > p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #88949f;
+  gap: 7px;
+}
+.bulletin-date {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #6f7e8a;
+  margin-top: 20px;
+}
+.sermon-section {
+  background: #f0eee6;
+  border-top: 2px solid var(--gold);
+  padding: 37px 40px 34px;
+  border-radius: 2px;
+  text-align: center;
+}
+.sermon-section > .eyebrow {
+  color: #9e8b60;
+  font-size: 9px;
+}
+.sermon-section h2 {
+  font-size: 51px;
+  margin: 19px auto 14px;
+  max-width: 580px;
+  letter-spacing: -0.6px;
+}
+.scripture-reference {
+  color: #967e4a;
+  font-size: 13px;
+}
+.speaker {
+  font-size: 10px;
+  color: #88907f;
+  margin-top: 13px;
+}
+.sermon-summary {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #737d78;
+  margin: 20px auto 0;
+  max-width: 540px;
+}
+.document-section {
+  padding: 38px 0 0;
+}
+.document-section .section-heading {
+  border-bottom: 1px solid #dfe3e2;
+  padding-bottom: 17px;
+  margin-bottom: 5px;
+}
+.document-section h2 {
+  font-size: 31px;
+}
+.document-section .section-heading > .eyebrow {
+  font-size: 8px;
+  color: #9da59f;
+}
+.document-section .section-heading > svg {
+  color: #9aab9c;
+}
+.announcement {
+  display: flex;
+  gap: 22px;
+  padding: 23px 0;
+  border-bottom: 1px solid #e6e8e4;
+}
+.announcement-index {
+  font-family: "Cormorant Garamond";
+  font-size: 25px;
+  color: #b5ab94;
+  width: 24px;
+  flex-shrink: 0;
+}
+.announcement h3,
+.event h3 {
+  font-family: "Cormorant Garamond";
+  font-size: 24px;
+  font-weight: 600;
+  color: #324658;
+  margin: 0 0 7px;
+}
+.announcement p,
+.event p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #7c8790;
+}
+.event {
+  display: flex;
+  align-items: start;
+  gap: 22px;
+  padding: 23px 0;
+  border-bottom: 1px solid #e6e8e4;
+}
+.event-date {
+  background: #eeeee7;
+  border: 1px solid #e3e3d7;
+  border-radius: 5px;
+  min-width: 56px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 8px 5px;
+  color: #9d8c65;
+}
+.event-date span {
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.event-date strong {
+  font-family: "Cormorant Garamond";
+  font-size: 29px;
+  line-height: 1.1;
+  font-weight: 500;
+  color: #6c7766;
+  margin: 3px 0;
+}
+.event .event-meta {
+  font-size: 10px;
+  color: #9d906f;
+  margin-bottom: 6px;
+}
+.member-links {
+  display: flex;
+  gap: 25px;
+  margin: 37px 0 0;
+}
+.member-links > div {
+  flex: 1;
+  border: 1px solid #dfe4e2;
+  background: #f4f5f0;
+  border-radius: 6px;
+  padding: 24px;
+}
+.member-links svg {
+  color: #8e9b8c;
+}
+.member-links h3 {
+  font-family: "Cormorant Garamond";
+  font-size: 24px;
+  font-weight: 500;
+  margin: 12px 0;
+}
+.member-links p {
+  font-size: 11px;
+  color: #8e978b;
+  line-height: 1.8;
+}
+.member-links .text-button {
+  font-size: 11px;
+}
+.notes-section {
+  margin-top: 40px;
+  border: 1px solid #dfe4e1;
+  border-radius: 7px;
+  background: #fff;
+  padding: 28px 30px;
+}
+.notes-section h2 {
+  font-size: 31px;
+  margin: 9px 0 14px;
+}
+.notes-section .eyebrow {
+  font-size: 8px;
+  color: #9b8b67;
+}
+.notes-section .section-heading > svg {
+  color: #91a38f;
+}
+.notes-section > .muted {
+  font-size: 11px;
+}
+.notes-section textarea {
+  background: #fafbf9;
+  line-height: 1.9;
+  font-size: 12px;
+  margin: 20px 0 15px;
+  padding: 18px;
+}
+.notes-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: 9px;
+}
+.success-text {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #8b9b7c;
+}
+.error-text {
+  color: #ab664a;
+  font-size: 10px;
+}
+.notes-footer .text-button {
+  font-size: 9px;
+  color: #8b949e;
+}
+.notes-section .fine-print {
+  margin-top: 20px;
+  font-size: 9px;
+}
+.bulletin-footer {
+  text-align: center;
+  border-top: 1px solid #dfe3de;
+  margin: 40px 0 5px;
+  padding-top: 25px;
+  font-family: "Cormorant Garamond";
+  font-size: 22px;
+  color: #a39676;
+}
+.bulletin-footer > span {
+  display: block;
+  font-family: "DM Sans";
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #97a29f;
+  margin-top: 13px;
+}
+.member-page-footer {
+  border-top: 1px solid #e1e4e0;
+  padding: 23px 45px;
+  font-size: 9px;
+  color: #8d9798;
+  display: flex;
+  justify-content: space-between;
+}
+.empty-state {
+  text-align: center;
+  padding: 100px 0;
+}
+.empty-state h1 {
+  font-size: 52px;
+  margin-bottom: 20px;
+}
+.empty-state p {
+  color: #87919b;
+  margin-bottom: 25px;
+}
+@media (min-width: 1450px) {
+  .workspace-main {
+    padding: 46px 50px;
+  }
+  .overview-grid {
+    grid-template-columns: 1.8fr 1fr;
+    gap: 35px;
+  }
+  .sunday-card {
+    min-height: 285px;
+  }
+  .sunday-card h2 {
+    font-size: 49px;
+    max-width: 430px;
+  }
+  .member-preview-card {
+    padding: 29px 32px;
+  }
+  .phone-preview {
+    height: 400px;
+    max-width: 235px;
+  }
+  .member-preview-card h2 {
+    font-size: 37px;
+  }
+  .workspace-section .section-heading h2 {
+    font-size: 29px;
+  }
+}
+@media (max-width: 1150px) {
+  .sidebar {
+    width: 220px;
+    padding: 28px 15px 15px;
+  }
+  .workspace-body {
+    margin-left: 220px;
+    width: calc(100% - 220px);
+  }
+  .workspace-main {
+    padding: 30px 26px;
+  }
+  .workspace-header {
+    padding: 0 26px;
+  }
+  .sample-banner {
+    padding: 10px 26px;
+  }
+  .header-location,
+  .header-separator {
+    display: none;
+  }
+  .overview-grid {
+    gap: 20px;
+    grid-template-columns: minmax(0, 1.45fr) minmax(240px, 1fr);
+  }
+  .sunday-card {
+    padding: 23px;
+    min-height: 280px;
+  }
+  .sunday-card h2 {
+    font-size: 38px;
+  }
+  .member-preview-card {
+    padding: 22px 18px;
+  }
+  .status-cards {
+    gap: 12px;
+  }
+  .status-cards > div {
+    padding: 18px 14px;
+  }
+  .status-card-icon {
+    right: 12px;
+  }
+  .status-cards p {
+    font-size: 8px;
+  }
+  .workspace-section .section-heading {
+    align-items: start;
+  }
+  .workspace-section .section-heading h2 {
+    font-size: 24px;
+  }
+  .workspace-section .section-heading > .text-button {
+    max-width: 80px;
+    font-size: 8px;
+  }
+  .bottom-note {
+    padding: 17px;
+  }
+  .bottom-note p {
+    max-width: 330px;
+  }
+  .workspace-footer {
+    padding: 20px 26px;
+  }
+  .editor-columns {
+    grid-template-columns: minmax(0, 1fr) 225px;
+    gap: 20px;
+  }
+  .form-card {
+    padding: 24px;
+  }
+  .aside-note {
+    padding: 23px 20px;
+  }
+  .access-story {
+    padding: 40px;
+  }
+  .access-story h1 {
+    font-size: 60px;
+  }
+  .access-main {
+    padding: 60px 45px;
+  }
+  .access-card > h2 {
+    font-size: 48px;
+  }
+  .sharing-grid {
+    grid-template-columns: 1fr 1.3fr;
+    gap: 20px;
+  }
+  .sharing-grid .button-row {
+    gap: 8px;
+  }
+  .sharing-grid .button {
+    font-size: 10px;
+  }
+  .qr-wrap svg {
+    width: 190px;
+    height: 190px;
+  }
+}
+@media (max-width: 950px) {
+  .overview-grid {
+    display: block;
+  }
+  .member-preview-card {
+    margin-top: 24px;
+    display: none;
+  }
+  .sunday-card {
+    min-height: 260px;
+  }
+  .sunday-card h2 {
+    font-size: 43px;
+    max-width: 450px;
+  }
+  .sunday-card-bottom {
+    margin-top: 23px;
+  }
+  .header-service {
+    display: none;
+  }
+  .editor-columns {
+    display: block;
+  }
+  .editor-aside {
+    position: static;
+    display: none;
+  }
+  .page-heading h1 {
+    font-size: 44px;
+  }
+  .page-heading > .button {
+    font-size: 11px;
+  }
+  .sample-banner > span:last-child {
+    display: none;
+  }
+  .sharing-grid {
+    display: block;
+  }
+  .qr-card {
+    max-width: 420px;
+    margin: 0 auto 25px;
+  }
+  .sharing-grid .qr-wrap svg {
+    width: 220px;
+    height: 220px;
+  }
+  .access-management-grid {
+    display: block;
+  }
+  .access-management-grid > .aside-note {
+    display: none;
+  }
+  .access-story h1 {
+    font-size: 52px;
+  }
+  .access-story {
+    padding: 38px 30px;
+  }
+  .access-main {
+    padding: 60px 30px;
+  }
+  .access-card > h2 {
+    font-size: 44px;
+  }
+  .access-story .wordmark {
+    font-size: 27px;
+  }
+  .access-story > footer {
+    font-size: 6px;
+  }
+  .access-story > footer > span {
+    font-size: 5px;
+  }
+  .access-church strong {
+    font-size: 10px;
+  }
+  .access-main > .pilot-chip {
+    right: 25px;
+  }
+  .access-layout {
+    grid-template-columns: 44% 56%;
+  }
+}
+@media (max-width: 720px) {
+  body {
+    font-size: 13px;
+  }
+  .sidebar {
+    transform: translateX(-100%);
+    width: 260px;
+    transition: transform 0.2s;
+    box-shadow: 15px 0 35px #14283f20;
+    padding: 30px 22px 15px;
+  }
+  .mobile-menu-open .sidebar {
+    transform: translateX(0);
+  }
+  .sidebar-close {
+    display: flex;
+    position: absolute;
+    top: 5px;
+    right: 7px;
+    color: #abbccc;
+  }
+  .mobile-menu-button {
+    display: flex;
+    padding-left: 0;
+  }
+  .workspace-body {
+    margin-left: 0;
+    width: 100%;
+  }
+  .workspace-header {
+    height: 63px;
+    padding: 0 20px;
+  }
+  .workspace-header > div {
+    gap: 10px;
+  }
+  .header-church {
+    font-size: 10px;
+  }
+  .workspace-header .pilot-chip {
+    font-size: 7px;
+    letter-spacing: 0.7px;
+    padding: 4px 7px;
+  }
+  .sample-banner {
+    padding: 10px 20px;
+    font-size: 8px;
+  }
+  .sample-banner > span {
+    gap: 5px;
+    line-height: 1.7;
+    display: block;
+  }
+  .sample-banner .sample-dot {
+    margin-right: 5px;
+  }
+  .workspace-main {
+    padding: 27px 20px;
+  }
+  .page-heading {
+    gap: 15px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    align-items: start;
+  }
+  .page-heading h1 {
+    font-size: 44px;
+    margin: 10px 0;
+  }
+  .page-heading > .button {
+    min-height: 39px;
+  }
+  .page-heading p {
+    font-size: 10px;
+  }
+  .page-heading > .button-row {
+    width: 100%;
+  }
+  .overview-grid {
+    display: block;
+  }
+  .sunday-card {
+    padding: 23px;
+    min-height: 265px;
+  }
+  .sunday-card h2 {
+    font-size: 41px;
+    max-width: 310px;
+  }
+  .sunday-date {
+    font-size: 9px;
+    margin-top: 24px;
+  }
+  .sunday-card-top .eyebrow {
+    font-size: 7px;
+    letter-spacing: 1.3px;
+  }
+  .sunday-card-bottom a {
+    font-size: 8px;
+  }
+  .status-cards > div {
+    padding: 17px 15px;
+  }
+  .status-cards .eyebrow {
+    font-size: 7px;
+  }
+  .status-cards h3 {
+    font-size: 25px;
+  }
+  .status-cards p {
+    font-size: 8px;
+    line-height: 1.9;
+  }
+  .status-card-icon {
+    top: 16px;
+    right: 14px;
+  }
+  .status-card-icon svg {
+    width: 16px;
+  }
+  .workspace-section {
+    margin-top: 27px;
+  }
+  .workspace-section .section-heading h2 {
+    font-size: 25px;
+    max-width: 200px;
+  }
+  .workspace-section .section-heading > .text-button {
+    max-width: 95px;
+    white-space: normal;
+  }
+  .detail-list a {
+    padding: 16px 14px;
+    gap: 12px;
+  }
+  .detail-list strong {
+    font-size: 11px;
+  }
+  .detail-list span:not(.detail-icon) {
+    font-size: 8px;
+  }
+  .bottom-note {
+    margin-top: 25px;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 17px;
+  }
+  .bottom-note strong {
+    font-size: 23px;
+  }
+  .bottom-note p {
+    font-size: 9px;
+    max-width: 260px;
+  }
+  .bottom-note > a {
+    margin: 5px 0 0 34px;
+    font-size: 10px;
+  }
+  .bottom-note-icon {
+    align-self: start;
+    margin-top: 6px;
+  }
+  .workspace-footer {
+    padding: 21px 20px;
+    gap: 12px;
+    font-size: 7px;
+  }
+  .workspace-footer > span:last-child {
+    font-size: 5px;
+    letter-spacing: 0.6px;
+  }
+  .editor-status {
+    padding: 12px;
+    gap: 10px;
+    font-size: 9px;
+    flex-wrap: wrap;
+  }
+  .editor-status > span:nth-child(2) {
+    font-size: 8px;
+  }
+  .editor-status .text-button {
+    margin-left: 0;
+    width: 100%;
+  }
+  .form-card {
+    padding: 23px 20px;
+    margin-bottom: 20px;
+  }
+  .form-card-heading h2 {
+    font-size: 26px;
+  }
+  .form-grid {
+    gap: 12px;
+  }
+  .form-grid input {
+    font-size: 11px;
+    padding: 10px;
+  }
+  .aside-note {
+    padding: 23px;
+  }
+  .form-card p {
+    font-size: 11px;
+  }
+  .invitation-row {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .invitation-row > div {
+    flex: 1;
+  }
+  .invitation-row .text-button {
+    width: 100%;
+    margin-left: 46px;
+  }
+  .large-status {
+    font-size: 9px;
+  }
+  .cc-dialog {
+    width: calc(100% - 32px) !important;
+    padding: 27px 23px !important;
+  }
+  .modal-title {
+    font-size: 32px;
+  }
+  .draft-document {
+    padding: 8px 20px;
+  }
+  .access-layout {
+    display: block;
+    min-height: 100vh;
+  }
+  .access-story {
+    padding: 24px 26px 25px;
+  }
+  .access-story .brand {
+    margin-bottom: 10px;
+  }
+  .access-story .wordmark {
+    font-size: 26px;
+  }
+  .access-story .brand-byline {
+    font-size: 6px;
+  }
+  .access-story-main {
+    padding: 19px 0 0;
+  }
+  .access-story-main > .eyebrow {
+    font-size: 8px;
+  }
+  .access-story h1 {
+    font-size: 46px;
+    line-height: 0.95;
+    margin: 15px 0;
+  }
+  .access-story h1 br {
+    display: block;
+  }
+  .access-story h1 em {
+    display: block;
+    margin-top: 6px;
+  }
+  .access-story-main > p,
+  .story-rule,
+  .access-story > footer {
+    display: none;
+  }
+  .access-church {
+    margin-top: 23px;
+    padding-top: 17px;
+    gap: 10px;
+  }
+  .access-church > svg {
+    width: 30px;
+    height: 30px;
+  }
+  .access-church strong {
+    font-size: 11px;
+  }
+  .access-church span {
+    font-size: 9px;
+  }
+  .access-main {
+    padding: 58px 26px 45px;
+  }
+  .access-main > .pilot-chip {
+    top: 19px;
+    right: 26px;
+  }
+  .access-card {
+    padding: 13px 0 25px;
+    max-width: 500px;
+  }
+  .access-card > h2 {
+    font-size: 44px;
+    margin: 12px 0 17px;
+  }
+  .access-card > h2 br {
+    display: none;
+  }
+  .access-card > .muted {
+    font-size: 11px;
+  }
+  .access-bottom {
+    font-size: 6px;
+    bottom: 18px;
+  }
+  .segmented {
+    margin: 22px 0;
+  }
+  .segmented button {
+    font-size: 10px;
+    padding: 10px;
+  }
+  .access-form input {
+    font-size: 11px;
+  }
+  .privacy-line {
+    margin-top: 27px;
+    padding-top: 19px;
+  }
+  .member-header {
+    padding: 17px 20px;
+    gap: 12px;
+    align-items: center;
+  }
+  .member-header .wordmark {
+    font-size: 24px;
+  }
+  .member-header .brand-byline {
+    font-size: 6px;
+  }
+  .member-header .brand-mark svg {
+    width: 27px;
+  }
+  .member-header-actions .text-button {
+    font-size: 9px;
+  }
+  .member-header-actions {
+    gap: 10px;
+    flex-direction: column;
+    align-items: end;
+  }
+  .member-header .pilot-chip {
+    font-size: 6px;
+    padding: 3px 5px;
+    letter-spacing: 0.5px;
+  }
+  .member-main {
+    padding: 23px 20px 35px;
+  }
+  .member-toolbar {
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    gap: 12px;
+  }
+  .member-toolbar > .eyebrow {
+    font-size: 8px;
+  }
+  .member-toolbar .button {
+    font-size: 9px;
+    min-height: 35px;
+    padding: 8px 11px;
+  }
+  .sample-notice {
+    padding: 10px 12px;
+    display: block;
+    font-size: 7px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+  }
+  .sample-notice .sample-dot {
+    margin-right: 5px;
+  }
+  .sample-notice > span:last-child {
+    display: block;
+    font-size: 8px;
+    margin-top: 4px;
+  }
+  .bulletin-intro {
+    padding: 7px 0 29px;
+  }
+  .bulletin-intro h1 {
+    font-size: 43px;
+    margin: 14px auto;
+    max-width: 350px;
+  }
+  .bulletin-intro > .eyebrow {
+    font-size: 8px;
+  }
+  .bulletin-intro > p {
+    font-size: 10px;
+    gap: 4px;
+  }
+  .bulletin-intro > p .small-divider {
+    margin: 0 5px;
+  }
+  .bulletin-date {
+    font-size: 8px;
+    letter-spacing: 0.7px;
+  }
+  .sermon-section {
+    padding: 30px 23px;
+  }
+  .sermon-section h2 {
+    font-size: 42px;
+    margin: 16px 0 13px;
+  }
+  .sermon-section > .eyebrow {
+    font-size: 8px;
+  }
+  .sermon-summary {
+    font-size: 11px;
+    margin-top: 17px;
+    line-height: 1.9;
+  }
+  .document-section {
+    padding-top: 30px;
+  }
+  .document-section .section-heading {
+    gap: 12px;
+  }
+  .document-section h2 {
+    font-size: 28px;
+  }
+  .document-section .section-heading > .eyebrow {
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+  .announcement {
+    padding: 21px 0;
+    gap: 14px;
+  }
+  .announcement-index {
+    font-size: 24px;
+    width: 18px;
+  }
+  .announcement h3,
+  .event h3 {
+    font-size: 24px;
+  }
+  .announcement p,
+  .event p {
+    font-size: 11px;
+  }
+  .event {
+    gap: 16px;
+  }
+  .event-date {
+    min-width: 49px;
+  }
+  .member-links {
+    display: block;
+    margin-top: 28px;
+  }
+  .member-links > div {
+    padding: 22px;
+    margin-bottom: 15px;
+  }
+  .member-links h3 {
+    font-size: 26px;
+    margin: 8px 0;
+  }
+  .notes-section {
+    padding: 23px 20px;
+    margin-top: 27px;
+  }
+  .notes-section h2 {
+    font-size: 30px;
+  }
+  .notes-section > .muted {
+    font-size: 10px;
+  }
+  .notes-footer {
+    gap: 10px;
+    align-items: center;
+  }
+  .notes-section .fine-print {
+    font-size: 8px;
+  }
+  .bulletin-footer {
+    font-size: 22px;
+    margin-top: 30px;
+    padding-top: 24px;
+  }
+  .bulletin-footer > span {
+    font-size: 6px;
+  }
+  .member-page-footer {
+    padding: 20px;
+    font-size: 7px;
+    gap: 15px;
+  }
+  .empty-state h1 {
+    font-size: 43px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm 17mm;
+  }
+  .no-print,
+  .sidebar,
+  .workspace-header,
+  .workspace-footer,
+  .sample-banner,
+  .page-heading,
+  .member-page-footer {
+    display: none !important;
+  }
+  body,
+  .workspace,
+  .member-page {
+    background: #fff !important;
+    color: #14283f;
+    font-size: 11px;
+  }
+  .workspace-body {
+    margin: 0;
+    width: 100%;
+    display: block;
+  }
+  .workspace-main,
+  .member-main {
+    padding: 0;
+    max-width: none;
+    margin: 0;
+    width: 100%;
+  }
+  .draft-document {
+    border: 0;
+    padding: 0;
+    max-width: none;
+  }
+  .sample-notice {
+    background: #fff !important;
+    border: 1px solid #aaa;
+    font-size: 8px;
+    margin: 0 0 18px;
+    padding: 7px 10px;
+  }
+  .sample-notice > span:last-child {
+    font-size: 8px;
+  }
+  .bulletin-intro {
+    padding: 5px 0 20px;
+  }
+  .bulletin-intro h1 {
+    font-size: 34px;
+  }
+  .bulletin-intro p,
+  .bulletin-date {
+    font-size: 9px;
+  }
+  .sermon-section {
+    background: #fff;
+    border-top: 1px solid #bba578;
+    border-bottom: 1px solid #bba578;
+    padding: 20px;
+  }
+  .sermon-section h2 {
+    font-size: 36px;
+    margin: 10px 0;
+  }
+  .sermon-summary {
+    font-size: 10px;
+    line-height: 1.7;
+    margin-top: 12px;
+  }
+  .document-section {
+    padding-top: 23px;
+  }
+  .document-section h2 {
+    font-size: 25px;
+  }
+  .announcement,
+  .event {
+    padding: 14px 0;
+    break-inside: avoid;
+  }
+  .announcement h3,
+  .event h3 {
+    font-size: 21px;
+  }
+  .announcement p,
+  .event p {
+    font-size: 10px;
+    line-height: 1.7;
+  }
+  .member-links {
+    gap: 15px;
+    margin-top: 22px;
+    break-inside: avoid;
+  }
+  .member-links > div {
+    background: #fff;
+    padding: 15px;
+  }
+  .member-links h3 {
+    font-size: 22px;
+  }
+  .member-links p {
+    font-size: 9px;
+  }
+  .member-links a {
+    font-size: 9px;
+    overflow-wrap: anywhere;
+  }
+  .member-links a:after {
+    content: " (" attr(href) ")";
+    font-size: 8px;
+    font-weight: 400;
+  }
+  .member-links svg {
+    display: none;
+  }
+  .bulletin-footer {
+    margin-top: 23px;
+    padding-top: 15px;
+    font-size: 19px;
+  }
+  .bulletin-footer > span {
+    font-size: 7px;
+  }
+  .bulletin-document section {
+    break-inside: auto;
+  }
+  .bulletin-document h2,
+  .bulletin-document h3 {
+    break-after: avoid;
+  }
+}
+
+.draft-print-marker {
+  display: none;
+}
+.editor-forms {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.editor-forms:disabled {
+  opacity: 0.8;
+}
+.editor-forms:disabled input,
+.editor-forms:disabled textarea {
+  cursor: wait;
+}
+.conflict-banner {
+  padding: 18px;
+  border: 1px solid #d8be86;
+  background: #f7f0df;
+  border-radius: 7px;
+  margin-bottom: 24px;
+  font-size: 11px;
+  color: #847046;
+}
+.conflict-banner p {
+  margin-bottom: 10px;
+}
+@media print {
+  .draft-print-marker {
+    display: block;
+    border: 1px solid #888;
+    padding: 8px;
+    margin-bottom: 16px;
+    font-size: 9px;
+    font-weight: 600;
+  }
+}
+
+/* LifeLine reference branding — official church artwork is never recolored. */
+:root {
+  --reference-blue: #335791;
+  --church-sky: #56aee0;
+  --church-ember: #e8722c;
+  --church-ember-deep: #c9581b;
+}
+.brand-tagline {
+  display: block;
+  font-size: 8px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  margin-top: 4px;
+  opacity: 0.78;
+  white-space: normal;
+  max-width: 215px;
+}
+.brand .wordmark {
+  font-size: 32px;
+  letter-spacing: -0.65px;
+}
+.brand .brand-byline {
+  letter-spacing: 1px;
+  font-size: 7px;
+  margin-top: 4px;
+}
+.sidebar .wordmark {
+  font-size: 32px;
+}
+.sidebar .brand-tagline {
+  font-size: 7px;
+  max-width: 165px;
+}
+.sidebar .brand-byline {
+  font-size: 6px;
+}
+.access-story .brand-tagline {
+  font-size: 9px;
+  max-width: 255px;
+}
+.access-story h1 {
+  font-size: 61px;
+}
+.access-church-logo {
+  width: 48px;
+  height: 45px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.switcher-church-logo {
+  width: 27px;
+  height: 27px;
+  object-fit: contain;
+}
+.phone-church-logo {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
+.bulletin-church-logo {
+  display: block;
+  width: 88px;
+  height: 83px;
+  object-fit: contain;
+  margin: 0 auto 20px;
+}
+.church-reference {
+  background: #fff;
+  border: 1px solid #dde4e7;
+  border-top: 3px solid var(--church-sky);
+  border-radius: 8px;
+  margin: 28px 0 6px;
+  overflow: hidden;
+}
+.church-reference > summary {
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  list-style: none;
+}
+.church-reference > summary::-webkit-details-marker {
+  display: none;
+}
+.church-reference > summary:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: -3px;
+}
+.church-reference > summary > svg {
+  margin-left: auto;
+  color: #8d9da8;
+  transition: transform 0.15s;
+}
+.church-reference[open] > summary > svg {
+  transform: rotate(180deg);
+}
+.church-reference-logo {
+  width: 44px;
+  height: 42px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.church-reference > summary .eyebrow {
+  font-size: 8px;
+  color: var(--reference-blue);
+}
+.church-reference > summary strong {
+  display: block;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 26px;
+  font-weight: 500;
+  margin-top: 3px;
+}
+.church-reference-content {
+  padding: 0 27px 25px;
+}
+.reference-mission {
+  border-top: 1px solid #e7eaeb;
+  padding-top: 23px;
+}
+.reference-mission > .eyebrow {
+  font-size: 8px;
+  color: var(--reference-blue);
+}
+.reference-mission > p {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 29px;
+  line-height: 1.25;
+  margin: 13px 0;
+  max-width: 610px;
+}
+.reference-scripture {
+  font-size: 10px;
+  color: #918666;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.reference-address {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  color: #7f8b96;
+  font-size: 11px;
+  margin: 20px 0 7px;
+}
+.reference-mission > .text-button {
+  color: var(--reference-blue);
+  font-size: 11px;
+}
+.reference-leadership {
+  margin: 24px 0;
+  border-top: 1px solid #e7eaeb;
+  padding-top: 22px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 8px 15px;
+  font-size: 10px;
+}
+.reference-leadership h3 {
+  grid-column: 1 / -1;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 9px;
+}
+.reference-leadership > span {
+  color: #8c98a1;
+}
+.reference-leadership > strong {
+  font-weight: 500;
+  color: #526a81;
+}
+.reference-leadership > .fine-print {
+  grid-column: 1 / -1;
+  font-size: 9px;
+  margin-top: 12px;
+}
+.ministry-reference {
+  background: #f5f7fa;
+  border: 1px solid #e0e7ef;
+  border-left: 2px solid var(--reference-blue);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 20px;
+  margin-top: 24px;
+}
+.ministry-logo-frame {
+  background: #fff;
+  padding: 12px;
+  border: 1px solid #e6ebf1;
+  border-radius: 5px;
+  flex-shrink: 0;
+  width: 200px;
+}
+.ministry-logo-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.ministry-reference .eyebrow {
+  font-size: 7px;
+  color: var(--reference-blue);
+  line-height: 1.8;
+}
+.ministry-reference > div:last-child > p:not(.fine-print) {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 23px;
+  color: var(--reference-blue);
+  line-height: 1.2;
+  margin: 8px 0;
+}
+.ministry-time {
+  font-size: 10px;
+  color: #7087a2;
+}
+.ministry-reference .fine-print {
+  font-size: 8px;
+  margin-top: 9px;
+}
+.reference-warning {
+  display: flex;
+  gap: 12px;
+  border: 1px solid #e1d4b7;
+  background: #faf5e9;
+  border-radius: 6px;
+  padding: 18px;
+  margin-top: 23px;
+  font-size: 11px;
+  color: #8a7954;
+}
+.reference-warning > svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.reference-warning strong {
+  font-size: 11px;
+  font-weight: 600;
+}
+.reference-warning p {
+  font-size: 10px;
+  line-height: 1.8;
+  margin-top: 6px;
+}
+.reference-source {
+  border-top: 1px solid #e7eaeb;
+  padding-top: 16px;
+  margin-top: 23px;
+  font-size: 8px;
+  color: #97a0a8;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.reference-source a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--reference-blue);
+}
+@media (max-width: 1150px) {
+  .access-story h1 {
+    font-size: 53px;
+  }
+  .brand-tagline {
+    font-size: 7px;
+  }
+}
+@media (max-width: 950px) {
+  .access-story h1 {
+    font-size: 47px;
+  }
+}
+@media (max-width: 720px) {
+  .access-story h1 {
+    font-size: 44px;
+    line-height: 1.04;
+  }
+  .access-story .wordmark {
+    font-size: 31px;
+  }
+  .access-story .brand-tagline {
+    font-size: 8px;
+  }
+  .access-church-logo {
+    width: 36px;
+    height: 34px;
+  }
+  .member-header .brand-tagline {
+    font-size: 6px;
+    max-width: 180px;
+  }
+  .member-header .wordmark {
+    font-size: 27px;
+  }
+  .member-header .brand-byline {
+    font-size: 5px;
+  }
+  .bulletin-church-logo {
+    width: 75px;
+    height: 71px;
+    margin-bottom: 18px;
+  }
+  .church-reference {
+    margin-top: 24px;
+  }
+  .church-reference > summary {
+    padding: 17px 19px;
+    gap: 11px;
+  }
+  .church-reference > summary strong {
+    font-size: 23px;
+  }
+  .church-reference-logo {
+    width: 38px;
+    height: 36px;
+  }
+  .church-reference-content {
+    padding: 0 20px 22px;
+  }
+  .reference-mission > p {
+    font-size: 27px;
+  }
+  .reference-leadership {
+    grid-template-columns: 1fr;
+  }
+  .reference-leadership > span {
+    margin-top: 8px;
+    font-size: 9px;
+  }
+  .ministry-reference {
+    display: block;
+    padding: 18px;
+  }
+  .ministry-logo-frame {
+    width: 210px;
+    margin: 0 auto 18px;
+  }
+  .reference-warning {
+    padding: 15px;
+  }
+}
+@media print {
+  .bulletin-church-logo {
+    width: 62px;
+    height: 59px;
+    margin-bottom: 12px;
+  }
+}
+
+/* Official site accents, with darker orange for legible small text. */
+.church-reference > summary .eyebrow,
+.reference-mission > .eyebrow {
+  color: var(--church-ember-deep);
+}
+.church-switcher .church-avatar {
+  background: #fff;
+}
+
+/* Owner-confirmed church identity and contact details beside LifeLine. */
+.lifeline-church-logo {
+  display: block;
+  width: 52px;
+  height: 49px;
+  object-fit: contain;
+  background: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  box-sizing: content-box;
+}
+.church-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.church-contact > span,
+.church-contact > a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.church-contact > span {
+  color: #7d8b97;
+}
+.church-contact > span svg {
+  flex-shrink: 0;
+}
+.church-contact > a {
+  color: var(--reference-blue);
+  text-decoration: none;
+}
+.church-contact > a:hover {
+  text-decoration: underline;
+}
+.church-contact > a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+.bulletin-contact {
+  margin: 16px auto 0;
+}
+.bulletin-intro .bulletin-contact > span,
+.bulletin-intro .bulletin-contact > a {
+  display: flex;
+}
+.access-contact {
+  align-items: flex-start;
+  margin-top: 17px;
+  font-size: 11px;
+}
+.access-contact > span {
+  color: #acbac7;
+}
+.access-contact > a {
+  color: #92c9ec;
+}
+.sidebar-contact {
+  align-items: flex-start;
+  font-size: 9px;
+  margin: 15px 0 25px;
+  gap: 8px;
+}
+.sidebar-contact > span {
+  color: #a9b9c8;
+  align-items: flex-start;
+}
+.sidebar-contact > a {
+  color: #92c9ec;
+}
+@media (max-width: 720px) {
+  .lifeline-church-logo {
+    width: 42px;
+    height: 40px;
+    padding: 4px;
+  }
+  .member-header .lifeline-church-logo {
+    width: 34px;
+    height: 32px;
+  }
+  .member-header .brand {
+    gap: 9px;
+  }
+  .church-contact {
+    font-size: 11px;
+  }
+  .church-contact > span {
+    justify-content: center;
+  }
+  .access-contact {
+    font-size: 10px;
+    margin-top: 15px;
+  }
+  .access-contact > span {
+    justify-content: flex-start;
+  }
+  .sidebar-contact {
+    font-size: 10px;
+  }
+  .sidebar-contact > span {
+    justify-content: flex-start;
+  }
+}
+@media print {
+  .bulletin-contact {
+    font-size: 10px;
+    gap: 3px;
+    margin-top: 9px;
+  }
+  .bulletin-contact > a {
+    color: #14283f;
+  }
+}

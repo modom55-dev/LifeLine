@@ -1,0 +1,33 @@
+/* Reference excerpt only. Not application CSS.
+ * Source: https://wholelifechurch.org/assets/index-D3dv93TI.css
+ * Observed through the public official site CSSOM on 2026-11-26.
+ * Values copied verbatim; formatting normalized.
+ */
+:root {
+  --ink: #0b1220;
+  --navy: #12203b;
+  --navy-2: #172a4c;
+  --sky: #56aee0;
+  --ember: #e8722c;
+  --ember-deep: #c9581b;
+  --paper: #fff;
+  --mist: #f1f3f5;
+  --warm: #f4efe8;
+  --muted-copy: #667184;
+  --background: oklch(100% 0 0);
+  --foreground: oklch(19% .025 260);
+  --primary: oklch(66% .17 46);
+  --primary-foreground: oklch(100% 0 0);
+  --secondary: oklch(95% .01 255);
+  --secondary-foreground: oklch(25% .04 260);
+  --accent: oklch(75% .11 230);
+  --accent-foreground: oklch(16% .03 255);
+  --muted: oklch(96% .006 255);
+  --muted-foreground: oklch(49% .025 255);
+  --border: oklch(90% .008 255);
+}
+/* Computed official site typefaces: body Archivo, sans-serif;
+ * h1 Anton, sans-serif. Source Serif 4 is also loaded by the site.
+ * The website applies only a CSS drop shadow to the logo; the actual
+ * source image was downloaded separately without recreating it.
+ */
