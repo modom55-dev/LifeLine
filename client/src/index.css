@@ -24,17 +24,17 @@
   --radius-lg: 10px;
 }
 :root {
-  --navy: #14283f;
-  --silver: #c8d1db;
-  --gold: #d6bd87;
-  --warm: #faf9f6;
-  --background: #faf9f6;
-  --foreground: #14283f;
-  --border: #e4e5e4;
-  --primary: #14283f;
+  --navy: #0b2c4d;
+  --silver: #c8d5db;
+  --gold: #f46921;
+  --warm: #f7fbfd;
+  --background: #f7fbfd;
+  --foreground: #0b2c4d;
+  --border: #e1e6e8;
+  --primary: #0b2c4d;
   --primary-foreground: #fff;
-  --muted: #f0f1ef;
-  --muted-foreground: #6a7582;
+  --muted: #eff0f1;
+  --muted-foreground: #6a7a82;
   --popover: #fff;
   --radius: 10px;
   font-synthesis: none;
@@ -115,12 +115,12 @@ textarea:focus {
   gap: 8px;
 }
 .muted {
-  color: #6b7682;
+  color: #6b7a82;
   line-height: 1.75;
 }
 .fine-print {
   font-size: 11px;
-  color: #74808b;
+  color: #74838b;
   line-height: 1.7;
 }
 .gold-text {
@@ -148,15 +148,15 @@ textarea:focus {
   color: #fff;
 }
 .primary:hover:not(:disabled) {
-  background: #263f5a;
+  background: #123a63;
 }
 .secondary {
   background: #fff;
-  border-color: #dce0e3;
+  border-color: #dce1e3;
   color: var(--navy);
 }
 .secondary:hover:not(:disabled) {
-  background: #f0f2f2;
+  background: #f0f1f2;
   border-color: var(--silver);
 }
 .wide {
@@ -180,7 +180,7 @@ textarea:focus {
   font-weight: 600;
 }
 .text-button:hover {
-  color: #8c7139;
+  color: #af4616;
 }
 .icon-button {
   border: 0;
@@ -193,7 +193,7 @@ textarea:focus {
   color: inherit;
 }
 .icon-button:hover {
-  background: #14283f0a;
+  background: #0b2c4d0a;
 }
 .spin {
   animation: spin 1s linear infinite;
@@ -248,20 +248,20 @@ textarea:focus {
   font-size: 9px;
   letter-spacing: 1px;
   font-weight: 700;
-  background: #eee9dc;
-  border: 1px solid #e4dac4;
+  background: #feefe7;
+  border: 1px solid #f9caaf;
   padding: 5px 9px;
   border-radius: 4px;
   display: inline-flex;
   gap: 6px;
   align-items: center;
-  color: #736040;
+  color: #9f4014;
   white-space: nowrap;
 }
 .sample-dot {
   width: 5px;
   height: 5px;
-  background: #a88748;
+  background: #ba4b17;
   border-radius: 50%;
   display: inline-block;
   flex-shrink: 0;
@@ -269,7 +269,7 @@ textarea:focus {
 .small-divider {
   height: 12px;
   width: 1px;
-  background: #ccd2d8;
+  background: #ccd4d8;
   display: inline-block;
   margin: 0 10px;
   vertical-align: middle;
@@ -278,11 +278,11 @@ textarea:focus {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #6f9f93;
+  background: #6f8f9f;
   display: inline-block;
 }
 .status-dot.amber {
-  background: #ac8a46;
+  background: #ba4b17;
 }
 /* Owner workspace */
 .workspace {
@@ -307,7 +307,7 @@ textarea:focus {
   font-size: 25px;
 }
 .sidebar .brand-byline {
-  color: #b9c5d1;
+  color: #b9c9d1;
   font-size: 6px;
 }
 .church-switcher {
@@ -321,8 +321,8 @@ textarea:focus {
   margin-bottom: 35px;
 }
 .church-avatar {
-  background: #d6bd871a;
-  border: 1px solid #d6bd8730;
+  background: #f469211a;
+  border: 1px solid #f4692130;
   color: var(--gold);
   width: 30px;
   height: 32px;
@@ -340,17 +340,17 @@ textarea:focus {
 .church-switcher span:not(.church-avatar) {
   display: block;
   font-size: 9px;
-  color: #9eafbe;
+  color: #9eb3be;
   margin-top: 2px;
 }
 .church-switcher > svg {
   margin-left: auto;
-  color: #8799aa;
+  color: #879eaa;
 }
 .nav-eyebrow {
   font-size: 8px;
   letter-spacing: 1.9px;
-  color: #91a3b5;
+  color: #91a9b5;
   font-weight: 600;
   padding-left: 12px;
   margin-bottom: 15px;
@@ -367,7 +367,7 @@ textarea:focus {
   font-size: 11px;
   padding: 12px 13px;
   border-radius: 5px;
-  color: #b7c4d1;
+  color: #b7c8d1;
   border-left: 2px solid transparent;
 }
 .sidebar nav a:hover {
@@ -382,7 +382,7 @@ textarea:focus {
 .nav-dot {
   width: 4px;
   height: 4px;
-  background: #99a7b5;
+  background: #99acb5;
   border-radius: 50%;
   margin-left: auto;
 }
@@ -402,14 +402,14 @@ textarea:focus {
   align-items: center;
   gap: 8px;
   font-size: 11px;
-  color: #d4dce4;
+  color: #d4dfe4;
 }
 .pilot-sidebar-card > span svg {
   color: var(--gold);
 }
 .pilot-sidebar-card p {
   font-size: 9px;
-  color: #91a4b6;
+  color: #91aab6;
   line-height: 1.8;
   margin: 10px 0;
 }
@@ -424,7 +424,7 @@ textarea:focus {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #a6b6c6;
+  color: #a6bbc6;
   font-size: 11px;
   padding: 8px 11px;
   background: none;
@@ -442,13 +442,13 @@ textarea:focus {
 .owner-profile > span:first-child {
   width: 32px;
   height: 32px;
-  background: #304258;
+  background: #304b58;
   border: 1px solid #ffffff1a;
   border-radius: 50%;
   display: grid;
   place-items: center;
   font-size: 11px;
-  color: #c5d2de;
+  color: #c5d6de;
 }
 .owner-profile strong {
   font-size: 10px;
@@ -457,14 +457,14 @@ textarea:focus {
 }
 .owner-profile small {
   font-size: 8px;
-  color: #95a7ba;
+  color: #95aeba;
   display: block;
 }
 .owner-dot {
   height: 5px;
   width: 5px;
   border-radius: 50%;
-  background: #80a494;
+  background: #8098a4;
   margin-left: auto;
 }
 .workspace-body {
@@ -495,7 +495,7 @@ textarea:focus {
 .header-separator {
   width: 1px;
   height: 14px;
-  background: #ddd;
+  background: #d9dee1;
 }
 .header-location,
 .header-service {
@@ -503,14 +503,14 @@ textarea:focus {
   align-items: center;
   gap: 6px;
   font-size: 10px;
-  color: #74808c;
+  color: #74848c;
 }
 .sample-banner {
   padding: 10px 39px;
-  background: #f3eee3;
-  border-bottom: 1px solid #e8e1d4;
+  background: #feefe7;
+  border-bottom: 1px solid #fad7c2;
   font-size: 9px;
-  color: #81745d;
+  color: #ba4b17;
   display: flex;
   justify-content: space-between;
   gap: 12px;
@@ -522,7 +522,7 @@ textarea:focus {
 }
 .sample-banner strong {
   font-weight: 600;
-  color: #6e614d;
+  color: #a64315;
 }
 .workspace-main {
   padding: 38px 39px 32px;
@@ -542,7 +542,7 @@ textarea:focus {
   align-self: center;
 }
 .page-heading .eyebrow {
-  color: #8a7857;
+  color: #ba4b17;
   font-size: 9px;
 }
 .page-heading h1 {
@@ -551,7 +551,7 @@ textarea:focus {
   margin: 9px 0 9px;
 }
 .page-heading p {
-  color: #75808a;
+  color: #75838a;
   font-size: 11px;
 }
 .overview-grid {
@@ -583,28 +583,28 @@ textarea:focus {
 .sunday-card-top .eyebrow {
   font-size: 8px;
   letter-spacing: 1.9px;
-  color: #c3af85;
+  color: #f18f57;
 }
 .light-status {
   font-size: 9px;
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #d4e1dd;
+  color: #d4dde1;
   border: 1px solid #ffffff20;
   background: #ffffff05;
   border-radius: 4px;
   padding: 3px 7px;
 }
 .sunday-date {
-  color: #bdcad7;
+  color: #bdced7;
   font-size: 10px;
   margin-top: 24px;
   position: relative;
   z-index: 1;
 }
 .sunday-date span {
-  color: #9baebf;
+  color: #9bb3bf;
   white-space: nowrap;
 }
 .sunday-card h2 {
@@ -634,20 +634,20 @@ textarea:focus {
   z-index: 1;
 }
 .sample-pill {
-  background: #d6bd8710;
-  border: 1px solid #d6bd8740;
+  background: #f4692110;
+  border: 1px solid #f4692140;
   border-radius: 3px;
   padding: 3px 6px;
   font-size: 7px;
   letter-spacing: 1px;
-  color: #d6bd87;
+  color: #f46921;
 }
 .sunday-card-bottom a {
   font-size: 9px;
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #d7dfe6;
+  color: #d7e1e6;
 }
 .card-watermark {
   position: absolute;
@@ -663,7 +663,7 @@ textarea:focus {
 }
 .status-cards > div {
   background: #fff;
-  border: 1px solid #e3e5e5;
+  border: 1px solid #e1e5e7;
   border-radius: 7px;
   padding: 19px 20px;
   flex: 1;
@@ -673,12 +673,12 @@ textarea:focus {
   position: absolute;
   right: 17px;
   top: 20px;
-  color: #91a0ac;
+  color: #91a3ac;
 }
 .status-cards .eyebrow {
   font-size: 8px;
   letter-spacing: 1.4px;
-  color: #8b96a0;
+  color: #8b99a0;
 }
 .status-cards h3 {
   font-family: "Cormorant Garamond";
@@ -688,7 +688,7 @@ textarea:focus {
 }
 .status-cards p {
   font-size: 9px;
-  color: #818c97;
+  color: #819097;
 }
 .workspace-section {
   margin-top: 27px;
@@ -708,7 +708,7 @@ textarea:focus {
 .detail-list {
   margin-top: 17px;
   background: #fff;
-  border: 1px solid #e2e5e5;
+  border: 1px solid #e2e4e5;
   border-radius: 7px;
   overflow: hidden;
 }
@@ -717,24 +717,24 @@ textarea:focus {
   align-items: center;
   gap: 14px;
   padding: 16px 18px;
-  border-bottom: 1px solid #ebeded;
+  border-bottom: 1px solid #ebeced;
 }
 .detail-list a:last-child {
   border: 0;
 }
 .detail-list a:hover {
-  background: #fafaf8;
+  background: #fef8f4;
 }
 .detail-icon {
-  background: #f1f3f3;
-  border: 1px solid #e9ebeb;
+  background: #f1f2f3;
+  border: 1px solid #e9eaeb;
   border-radius: 5px;
   width: 36px;
   height: 38px;
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  color: #6b7b8b;
+  color: #6b808b;
 }
 .detail-list a > div {
   min-width: 0;
@@ -747,7 +747,7 @@ textarea:focus {
 .detail-list span:not(.detail-icon) {
   display: block;
   font-size: 9px;
-  color: #88919a;
+  color: #88949a;
   margin-top: 3px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -755,12 +755,12 @@ textarea:focus {
 }
 .detail-list a > svg {
   margin-left: auto;
-  color: #a2acb5;
+  color: #a2afb5;
   flex-shrink: 0;
 }
 .last-saved {
   font-size: 8px;
-  color: #8a939c;
+  color: #8a969c;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -771,21 +771,21 @@ textarea:focus {
 }
 .member-preview-card {
   background: #fff;
-  border: 1px solid #e3e5e5;
+  border: 1px solid #e1e5e7;
   border-radius: 8px;
   padding: 23px 24px;
 }
 .member-preview-card .eyebrow {
   font-size: 8px;
   letter-spacing: 1.3px;
-  color: #89939c;
+  color: #89969c;
 }
 .tiny-pill {
   font-size: 6px;
   letter-spacing: 0.7px;
   padding: 3px 6px;
-  background: #f2f3f1;
-  color: #81897e;
+  background: #f1f2f3;
+  color: #7e8589;
   border-radius: 3px;
 }
 .member-preview-card h2 {
@@ -798,14 +798,14 @@ textarea:focus {
 }
 .phone-preview {
   background: #fff;
-  border: 5px solid #263748;
+  border: 5px solid #0f3352;
   border-radius: 27px;
   max-width: 225px;
   margin: 25px auto 22px;
   height: 377px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 8px 20px #14283f0d;
+  box-shadow: 0 8px 20px #0b2c4d0d;
 }
 .phone-notch {
   position: absolute;
@@ -814,7 +814,7 @@ textarea:focus {
   transform: translateX(-50%);
   height: 12px;
   width: 80px;
-  background: #263748;
+  background: #0f3352;
   border-radius: 0 0 10px 10px;
   z-index: 2;
 }
@@ -831,15 +831,15 @@ textarea:focus {
   font-weight: 600;
   font-size: 16px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #d9dee1;
 }
 .phone-brand svg {
-  color: #9e874e;
+  color: #ba4b17;
 }
 .phone-sample {
   font-size: 5px;
   letter-spacing: 1.1px;
-  color: #927b4c;
+  color: #ba4b17;
   display: block;
   margin: 12px 0;
 }
@@ -856,11 +856,11 @@ textarea:focus {
 }
 .phone-meta {
   font-size: 6px;
-  color: #8b949c;
+  color: #8b969c;
 }
 .phone-rule {
   height: 1px;
-  background: #deded9;
+  background: #fad3bd;
   margin: 15px 0;
 }
 .phone-content h4 {
@@ -872,12 +872,12 @@ textarea:focus {
 }
 .phone-scripture {
   font-size: 7px;
-  color: #8d794c;
+  color: #ba4b17;
 }
 .phone-summary {
   font-size: 6px;
   line-height: 1.9;
-  color: #7b858e;
+  color: #7b888e;
   margin-top: 9px;
 }
 .phone-content h5 {
@@ -892,8 +892,8 @@ textarea:focus {
 }
 .bottom-note {
   margin-top: 28px;
-  border: 1px solid #e2dfd7;
-  background: #f5f3ed;
+  border: 1px solid #fad5bf;
+  background: #feefe7;
   border-radius: 7px;
   display: flex;
   align-items: center;
@@ -901,7 +901,7 @@ textarea:focus {
   padding: 19px 22px;
 }
 .bottom-note-icon {
-  color: #8d805e;
+  color: #ba4b17;
   display: flex;
 }
 .bottom-note strong {
@@ -911,7 +911,7 @@ textarea:focus {
 }
 .bottom-note p {
   font-size: 9px;
-  color: #8b877c;
+  color: #ba4b17;
   margin-top: 2px;
 }
 .bottom-note > a {
@@ -921,10 +921,10 @@ textarea:focus {
 }
 .workspace-footer {
   padding: 20px 39px 22px;
-  border-top: 1px solid #e7e7e3;
+  border-top: 1px solid #feefe7;
   display: flex;
   justify-content: space-between;
-  color: #9299a0;
+  color: #929ba0;
   font-size: 8px;
 }
 .workspace-footer > span:last-child {
@@ -935,7 +935,7 @@ textarea:focus {
   display: inline-block;
   width: 1px;
   height: 8px;
-  background: #cdd1d4;
+  background: #cdd2d4;
   margin: 0 9px;
 }
 .mobile-menu-button,
@@ -948,7 +948,7 @@ label {
   font-weight: 500;
   display: block;
   margin: 18px 0;
-  color: #4d5d6d;
+  color: #4d626d;
 }
 input,
 textarea {
@@ -956,7 +956,7 @@ textarea {
   width: 100%;
   margin-top: 7px;
   background: #fff;
-  border: 1px solid #dce0e3;
+  border: 1px solid #dce1e3;
   border-radius: 5px;
   padding: 11px 13px;
   font-size: 12px;
@@ -965,7 +965,7 @@ textarea {
 }
 input::placeholder,
 textarea::placeholder {
-  color: #a1aab2;
+  color: #a1acb2;
   font-weight: 400;
 }
 textarea {
@@ -975,11 +975,11 @@ textarea {
 .optional {
   font-size: 9px;
   font-weight: 400;
-  color: #8b96a0;
+  color: #8b99a0;
   margin-left: 7px;
 }
 .required {
-  color: #997c45;
+  color: #ba4b17;
 }
 .form-grid {
   display: grid;
@@ -991,7 +991,7 @@ textarea {
 }
 .form-card {
   background: #fff;
-  border: 1px solid #e0e4e5;
+  border: 1px solid #e0e3e5;
   border-radius: 8px;
   padding: 26px 28px;
   margin-bottom: 22px;
@@ -1007,7 +1007,7 @@ textarea {
 .form-card > p,
 .form-card form > p {
   font-size: 12px;
-  color: #71808d;
+  color: #71848d;
   margin-bottom: 14px;
   line-height: 1.8;
 }
@@ -1020,7 +1020,7 @@ textarea {
   margin-bottom: 16px;
 }
 .form-card-heading > svg {
-  color: #8f9aa3;
+  color: #8f9ca3;
 }
 .form-card-heading h2 {
   font-size: 26px;
@@ -1029,19 +1029,19 @@ textarea {
   margin-left: auto;
   font-size: 9px;
   letter-spacing: 1.5px;
-  color: #a3a8aa;
+  color: #9caab1;
 }
 .editor-status {
-  border: 1px solid #e1e3e1;
+  border: 1px solid #dfe3e5;
   border-radius: 6px;
   padding: 11px 16px;
-  background: #f2f3ef;
+  background: #eff2f3;
   display: flex;
   gap: 20px;
   align-items: center;
   margin: -6px 0 24px;
   font-size: 10px;
-  color: #758379;
+  color: #757e83;
 }
 .editor-status > span {
   display: flex;
@@ -1051,7 +1051,7 @@ textarea {
 .editor-status > span:nth-child(2) {
   margin-left: auto;
   font-size: 9px;
-  color: #8a939a;
+  color: #8a959a;
 }
 .editor-status .text-button {
   margin-left: auto;
@@ -1068,11 +1068,11 @@ textarea {
   align-self: start;
 }
 .aside-note {
-  background: #f0eee6;
-  border: 1px solid #e1dccf;
+  background: #feefe7;
+  border: 1px solid #f9cfb7;
   border-radius: 8px;
   padding: 25px 26px;
-  color: #6e674f;
+  color: #a84315;
 }
 .aside-note > .eyebrow {
   font-size: 8px;
@@ -1098,35 +1098,35 @@ textarea {
   font-size: 11px;
   display: block;
   font-weight: 500;
-  color: #52616b;
+  color: #52636b;
 }
 .aside-note li span {
   font-family: "DM Sans";
   font-size: 10px;
   line-height: 1.8;
   display: block;
-  color: #8a8a7b;
+  color: #ba4b17;
   margin-top: 5px;
 }
 .aside-note > p {
   font-size: 11px;
   line-height: 1.8;
   margin: 16px 0;
-  color: #7f806f;
+  color: #ba4b17;
 }
 .quiet-card {
   display: flex;
   gap: 13px;
-  background: #f0f2f1;
-  border: 1px solid #e2e6e3;
+  background: #f0f1f2;
+  border: 1px solid #e2e5e6;
   border-radius: 7px;
   padding: 20px;
   margin: 21px 0;
-  color: #72817f;
+  color: #727c81;
 }
 .quiet-card > svg {
   flex-shrink: 0;
-  color: #8a998f;
+  color: #8a9499;
   margin-top: 3px;
 }
 .quiet-card p {
@@ -1139,14 +1139,14 @@ textarea {
 }
 .quiet-card strong,
 .quiet-card h3 {
-  color: #536a63;
+  color: #53626a;
   font-size: 11px;
 }
 .quiet-card h3 {
   margin-bottom: 7px;
 }
 .editable-item {
-  border-bottom: 1px solid #e9ebed;
+  border-bottom: 1px solid #e9eced;
   padding: 6px 0 15px;
   margin-bottom: 15px;
 }
@@ -1156,26 +1156,26 @@ textarea {
   justify-content: space-between;
   font-size: 8px;
   letter-spacing: 1.2px;
-  color: #a2a8ad;
+  color: #a2a9ad;
 }
 .editable-item label {
   margin: 13px 0;
 }
 .add-button {
-  background: #f5f6f5;
+  background: #f5f6f6;
   border: 1px dashed #cfd6da;
   width: 100%;
-  color: #7b8995;
+  color: #7b8c95;
   font-size: 11px;
 }
 .validation-errors {
   display: flex;
   gap: 15px;
-  background: #fcf0eb;
-  border: 1px solid #eacdc2;
+  background: #ebf6fc;
+  border: 1px solid #c2ddea;
   padding: 18px;
   border-radius: 7px;
-  color: #914831;
+  color: #317191;
   margin: 0 0 24px;
 }
 .validation-errors p {
@@ -1189,7 +1189,7 @@ textarea {
   background: #fff;
   max-width: 580px;
   padding: 32px !important;
-  border: 1px solid #dce0e3;
+  border: 1px solid #dce1e3;
   border-radius: 10px;
   color: var(--navy);
 }
@@ -1214,11 +1214,11 @@ textarea {
   font-size: 11px;
   min-height: 320px;
   margin: 15px 0 20px;
-  background: #fafaf8;
+  background: #fef8f4;
 }
 .publish-summary {
-  background: #f7f5ef;
-  border: 1px solid #e6e1d6;
+  background: #fef0e8;
+  border: 1px solid #fad7c2;
   border-radius: 7px;
   padding: 22px;
   margin: 20px 0;
@@ -1231,11 +1231,11 @@ textarea {
 }
 .publish-summary p {
   font-size: 12px;
-  color: #8b7c63;
+  color: #ba4b17;
 }
 .publish-summary .eyebrow {
   font-size: 8px;
-  color: #9b865b;
+  color: #ba4b17;
 }
 .sharing-grid {
   display: grid;
@@ -1248,7 +1248,7 @@ textarea {
   padding: 35px 22px;
 }
 .qr-card > .eyebrow {
-  color: #9a865e;
+  color: #ba4b17;
   font-size: 9px;
 }
 .qr-card > h2 {
@@ -1267,7 +1267,7 @@ textarea {
 .qr-wrap {
   display: inline-block;
   background: #fff;
-  border: 1px solid #e9e5d9;
+  border: 1px solid #feefe7;
   border-radius: 8px;
   padding: 6px;
 }
@@ -1288,17 +1288,17 @@ textarea {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #74837a;
+  color: #747e83;
 }
 .created-invite {
-  background: #f3f6f2;
-  border: 1px solid #dbe5d9;
+  background: #f2f5f6;
+  border: 1px solid #d9e1e5;
   border-radius: 7px;
   padding: 20px;
   margin-top: 27px;
 }
 .created-invite .eyebrow {
-  color: #788770;
+  color: #707f87;
   font-size: 8px;
 }
 .created-invite h3 {
@@ -1309,7 +1309,7 @@ textarea {
 .created-invite details {
   font-size: 10px;
   margin: 15px 0;
-  color: #71806c;
+  color: #6c7980;
 }
 .created-invite .fine-print {
   margin-top: 15px;
@@ -1322,7 +1322,7 @@ textarea {
   align-items: center;
   gap: 15px;
   padding: 20px 0;
-  border-bottom: 1px solid #ebeded;
+  border-bottom: 1px solid #ebeced;
 }
 .invitation-row:last-child {
   border-bottom: 0;
@@ -1333,7 +1333,7 @@ textarea {
 }
 .invitation-row p {
   font-size: 10px;
-  color: #89939c;
+  color: #89969c;
   margin-top: 5px;
   display: flex;
   gap: 6px;
@@ -1341,17 +1341,17 @@ textarea {
 }
 .invitation-status {
   font-size: 9px;
-  border: 1px solid #d9e3d9;
+  border: 1px solid #d9e0e3;
   padding: 3px 9px;
-  background: #f1f5f0;
-  color: #778570;
+  background: #f0f3f5;
+  color: #707e85;
   border-radius: 4px;
   margin-left: auto;
 }
 .invitation-status.inactive {
-  background: #f4f3f1;
-  color: #94938a;
-  border-color: #e4e2dd;
+  background: #feefe7;
+  color: #ba4b17;
+  border-color: #feefe7;
 }
 .invitation-row > .text-button {
   font-size: 10px;
@@ -1360,14 +1360,14 @@ textarea {
 .empty-invites {
   text-align: center;
   padding: 35px;
-  color: #8e9a94;
+  color: #8e969a;
 }
 .empty-invites h3 {
   font-family: "Cormorant Garamond";
   font-size: 27px;
   font-weight: 500;
   margin: 13px 0 5px;
-  color: #687b72;
+  color: #68757b;
 }
 .empty-invites p {
   font-size: 11px;
@@ -1381,7 +1381,7 @@ textarea {
 .guide-steps li {
   margin: 25px 0;
   padding-left: 10px;
-  color: #89917e;
+  color: #7e8b91;
 }
 .guide-steps strong {
   font-size: 13px;
@@ -1389,7 +1389,7 @@ textarea {
 }
 .guide-steps p {
   font-size: 12px;
-  color: #78848e;
+  color: #78878e;
   margin-top: 5px;
   line-height: 1.9;
 }
@@ -1425,7 +1425,7 @@ textarea {
 }
 .access-story .brand-byline {
   font-size: 7px;
-  color: #bbc5d0;
+  color: #bbc9d0;
 }
 .access-story-main {
   margin: auto 0;
@@ -1452,7 +1452,7 @@ textarea {
 }
 .access-story-main > p {
   font-size: 12px;
-  color: #b6c1ce;
+  color: #b6c6ce;
   line-height: 1.9;
 }
 .access-church {
@@ -1473,13 +1473,13 @@ textarea {
 }
 .access-church span {
   font-size: 10px;
-  color: #9caec0;
+  color: #9cb4c0;
   display: block;
   margin-top: 4px;
 }
 .access-story > footer {
   font-size: 8px;
-  color: #8e9eb0;
+  color: #8ea5b0;
   letter-spacing: 1.3px;
   display: flex;
   justify-content: space-between;
@@ -1508,7 +1508,7 @@ textarea {
   padding: 40px 0;
 }
 .access-card > .eyebrow {
-  color: #a18d66;
+  color: #ba4b17;
   font-size: 9px;
 }
 .access-card > h2 {
@@ -1521,9 +1521,9 @@ textarea {
 }
 .segmented {
   display: flex;
-  border: 1px solid #dedfdb;
+  border: 1px solid #dbdedf;
   border-radius: 6px;
-  background: #f0f1ed;
+  background: #edf0f1;
   padding: 4px;
   margin: 28px 0 23px;
   gap: 4px;
@@ -1537,14 +1537,14 @@ textarea {
   background: transparent;
   border: 0;
   padding: 9px 12px;
-  color: #85909a;
+  color: #85939a;
   font-size: 11px;
   border-radius: 4px;
 }
 .segmented button.active {
   background: #fff;
   color: var(--navy);
-  box-shadow: 0 1px 4px #14283f09;
+  box-shadow: 0 1px 4px #0b2c4d09;
 }
 .access-form h3 {
   font-size: 13px;
@@ -1570,15 +1570,15 @@ textarea {
   display: flex;
   gap: 10px;
   align-items: center;
-  color: #8c998d;
+  color: #8c9599;
   font-size: 9px;
   padding-top: 22px;
   margin-top: 30px;
-  border-top: 1px solid #e2e4df;
+  border-top: 1px solid #dfe2e4;
   line-height: 1.9;
 }
 .access-bottom {
-  color: #a0a6a6;
+  color: #98a7ae;
   font-size: 7px;
   letter-spacing: 1.4px;
   position: absolute;
@@ -1592,7 +1592,7 @@ textarea {
   gap: 25px;
   padding: 20px 45px;
   background: #fff;
-  border-bottom: 1px solid #e4e5e2;
+  border-bottom: 1px solid #e2e4e5;
 }
 .member-header .brand {
   color: var(--navy);
@@ -1616,7 +1616,7 @@ textarea {
 }
 .member-toolbar > .eyebrow {
   font-size: 9px;
-  color: #9d8c67;
+  color: #ba4b17;
 }
 .member-toolbar .button {
   font-size: 10px;
@@ -1625,12 +1625,12 @@ textarea {
 }
 .sample-notice {
   padding: 12px 16px;
-  background: #f2eee3;
-  border: 1px solid #e7dfcf;
+  background: #feefe7;
+  border: 1px solid #fad3bc;
   border-radius: 4px;
   font-size: 8px;
   letter-spacing: 1px;
-  color: #8d7850;
+  color: #ba4b17;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1648,7 +1648,7 @@ textarea {
   padding: 13px 0 36px;
 }
 .bulletin-intro > .eyebrow {
-  color: #958258;
+  color: #ba4b17;
   font-size: 9px;
 }
 .bulletin-intro h1 {
@@ -1664,24 +1664,24 @@ textarea {
   align-items: center;
   justify-content: center;
   font-size: 11px;
-  color: #88949f;
+  color: #88979f;
   gap: 7px;
 }
 .bulletin-date {
   font-size: 10px;
   letter-spacing: 1px;
-  color: #6f7e8a;
+  color: #6f818a;
   margin-top: 20px;
 }
 .sermon-section {
-  background: #f0eee6;
+  background: #feefe7;
   border-top: 2px solid var(--gold);
   padding: 37px 40px 34px;
   border-radius: 2px;
   text-align: center;
 }
 .sermon-section > .eyebrow {
-  color: #9e8b60;
+  color: #ba4b17;
   font-size: 9px;
 }
 .sermon-section h2 {
@@ -1691,18 +1691,18 @@ textarea {
   letter-spacing: -0.6px;
 }
 .scripture-reference {
-  color: #967e4a;
+  color: #ba4b17;
   font-size: 13px;
 }
 .speaker {
   font-size: 10px;
-  color: #88907f;
+  color: #7f8a90;
   margin-top: 13px;
 }
 .sermon-summary {
   font-size: 12px;
   line-height: 1.9;
-  color: #737d78;
+  color: #737a7d;
   margin: 20px auto 0;
   max-width: 540px;
 }
@@ -1710,7 +1710,7 @@ textarea {
   padding: 38px 0 0;
 }
 .document-section .section-heading {
-  border-bottom: 1px solid #dfe3e2;
+  border-bottom: 1px solid #dfe2e3;
   padding-bottom: 17px;
   margin-bottom: 5px;
 }
@@ -1719,21 +1719,21 @@ textarea {
 }
 .document-section .section-heading > .eyebrow {
   font-size: 8px;
-  color: #9da59f;
+  color: #9da2a5;
 }
 .document-section .section-heading > svg {
-  color: #9aab9c;
+  color: #9aa5ab;
 }
 .announcement {
   display: flex;
   gap: 22px;
   padding: 23px 0;
-  border-bottom: 1px solid #e6e8e4;
+  border-bottom: 1px solid #e4e7e8;
 }
 .announcement-index {
   font-family: "Cormorant Garamond";
   font-size: 25px;
-  color: #b5ab94;
+  color: #f19058;
   width: 24px;
   flex-shrink: 0;
 }
@@ -1742,32 +1742,32 @@ textarea {
   font-family: "Cormorant Garamond";
   font-size: 24px;
   font-weight: 600;
-  color: #324658;
+  color: #324b58;
   margin: 0 0 7px;
 }
 .announcement p,
 .event p {
   font-size: 12px;
   line-height: 1.9;
-  color: #7c8790;
+  color: #7c8990;
 }
 .event {
   display: flex;
   align-items: start;
   gap: 22px;
   padding: 23px 0;
-  border-bottom: 1px solid #e6e8e4;
+  border-bottom: 1px solid #e4e7e8;
 }
 .event-date {
-  background: #eeeee7;
-  border: 1px solid #e3e3d7;
+  background: #feefe7;
+  border: 1px solid #fad5c0;
   border-radius: 5px;
   min-width: 56px;
   display: flex;
   align-items: center;
   flex-direction: column;
   padding: 8px 5px;
-  color: #9d8c65;
+  color: #ba4b17;
 }
 .event-date span {
   font-size: 8px;
@@ -1779,12 +1779,12 @@ textarea {
   font-size: 29px;
   line-height: 1.1;
   font-weight: 500;
-  color: #6c7766;
+  color: #667177;
   margin: 3px 0;
 }
 .event .event-meta {
   font-size: 10px;
-  color: #9d906f;
+  color: #ba4b17;
   margin-bottom: 6px;
 }
 .member-links {
@@ -1794,13 +1794,13 @@ textarea {
 }
 .member-links > div {
   flex: 1;
-  border: 1px solid #dfe4e2;
-  background: #f4f5f0;
+  border: 1px solid #dfe2e4;
+  background: #f0f3f5;
   border-radius: 6px;
   padding: 24px;
 }
 .member-links svg {
-  color: #8e9b8c;
+  color: #8c969b;
 }
 .member-links h3 {
   font-family: "Cormorant Garamond";
@@ -1810,7 +1810,7 @@ textarea {
 }
 .member-links p {
   font-size: 11px;
-  color: #8e978b;
+  color: #8b9397;
   line-height: 1.8;
 }
 .member-links .text-button {
@@ -1818,7 +1818,7 @@ textarea {
 }
 .notes-section {
   margin-top: 40px;
-  border: 1px solid #dfe4e1;
+  border: 1px solid #dfe2e4;
   border-radius: 7px;
   background: #fff;
   padding: 28px 30px;
@@ -1829,16 +1829,16 @@ textarea {
 }
 .notes-section .eyebrow {
   font-size: 8px;
-  color: #9b8b67;
+  color: #ba4b17;
 }
 .notes-section .section-heading > svg {
-  color: #91a38f;
+  color: #8f9ca3;
 }
 .notes-section > .muted {
   font-size: 11px;
 }
 .notes-section textarea {
-  background: #fafbf9;
+  background: #f9fafb;
   line-height: 1.9;
   font-size: 12px;
   margin: 20px 0 15px;
@@ -1854,15 +1854,15 @@ textarea {
   display: flex;
   align-items: center;
   gap: 5px;
-  color: #8b9b7c;
+  color: #7c919b;
 }
 .error-text {
-  color: #ab664a;
+  color: #4a8bab;
   font-size: 10px;
 }
 .notes-footer .text-button {
   font-size: 9px;
-  color: #8b949e;
+  color: #8b989e;
 }
 .notes-section .fine-print {
   margin-top: 20px;
@@ -1870,26 +1870,26 @@ textarea {
 }
 .bulletin-footer {
   text-align: center;
-  border-top: 1px solid #dfe3de;
+  border-top: 1px solid #dee1e3;
   margin: 40px 0 5px;
   padding-top: 25px;
   font-family: "Cormorant Garamond";
   font-size: 22px;
-  color: #a39676;
+  color: #ba4b17;
 }
 .bulletin-footer > span {
   display: block;
   font-family: "DM Sans";
   font-size: 8px;
   letter-spacing: 1px;
-  color: #97a29f;
+  color: #979ea2;
   margin-top: 13px;
 }
 .member-page-footer {
-  border-top: 1px solid #e1e4e0;
+  border-top: 1px solid #e0e3e4;
   padding: 23px 45px;
   font-size: 9px;
-  color: #8d9798;
+  color: #8d9498;
   display: flex;
   justify-content: space-between;
 }
@@ -1902,7 +1902,7 @@ textarea {
   margin-bottom: 20px;
 }
 .empty-state p {
-  color: #87919b;
+  color: #87949b;
   margin-bottom: 25px;
 }
 @media (min-width: 1450px) {
@@ -2131,7 +2131,7 @@ textarea {
     transform: translateX(-100%);
     width: 260px;
     transition: transform 0.2s;
-    box-shadow: 15px 0 35px #14283f20;
+    box-shadow: 15px 0 35px #0b2c4d20;
     padding: 30px 22px 15px;
   }
   .mobile-menu-open .sidebar {
@@ -2142,7 +2142,7 @@ textarea {
     position: absolute;
     top: 5px;
     right: 7px;
-    color: #abbccc;
+    color: #abc1cc;
   }
   .mobile-menu-button {
     display: flex;
@@ -2647,7 +2647,7 @@ textarea {
   .workspace,
   .member-page {
     background: #fff !important;
-    color: #14283f;
+    color: #0b2c4d;
     font-size: 11px;
   }
   .workspace-body {
@@ -2669,7 +2669,7 @@ textarea {
   }
   .sample-notice {
     background: #fff !important;
-    border: 1px solid #aaa;
+    border: 1px solid #a0adb4;
     font-size: 8px;
     margin: 0 0 18px;
     padding: 7px 10px;
@@ -2689,8 +2689,8 @@ textarea {
   }
   .sermon-section {
     background: #fff;
-    border-top: 1px solid #bba578;
-    border-bottom: 1px solid #bba578;
+    border-top: 1px solid #f08243;
+    border-bottom: 1px solid #f08243;
     padding: 20px;
   }
   .sermon-section h2 {
@@ -2784,12 +2784,12 @@ textarea {
 }
 .conflict-banner {
   padding: 18px;
-  border: 1px solid #d8be86;
-  background: #f7f0df;
+  border: 1px solid #f39d6b;
+  background: #feefe7;
   border-radius: 7px;
   margin-bottom: 24px;
   font-size: 11px;
-  color: #847046;
+  color: #b44816;
 }
 .conflict-banner p {
   margin-bottom: 10px;
@@ -2797,7 +2797,7 @@ textarea {
 @media print {
   .draft-print-marker {
     display: block;
-    border: 1px solid #888;
+    border: 1px solid #7a8d96;
     padding: 8px;
     margin-bottom: 16px;
     font-size: 9px;
@@ -3283,4 +3283,92 @@ textarea {
   .bulletin-contact > a {
     color: #14283f;
   }
+}
+
+/* WholeLife logo palette — sky blue arch, orange cross and book (Nov 2026). */
+:root {
+  --sky: #30c6f3;
+  --sky-deep: #0f8fbf;
+  --sky-soft: #e8f7fd;
+  --ember: #f46921;
+  --ember-text: #bf4d16; /* orange that stays readable on light backgrounds */
+  --ember-soft: #fff1e8;
+  --brand-stripe: linear-gradient(90deg, var(--sky) 0%, var(--sky) 55%, var(--ember) 55%, var(--ember) 100%);
+}
+/* Primary actions take the cross-and-book orange. */
+.primary {
+  background: #c94f17;
+  color: #fff;
+}
+.primary:hover:not(:disabled) {
+  background: #a9410f;
+}
+.secondary:hover:not(:disabled) {
+  background: var(--sky-soft);
+  border-color: var(--sky);
+}
+.gold-text {
+  color: var(--ember);
+}
+/* Small orange text on light surfaces uses the deeper, readable orange. */
+.fine-print a,
+.page-heading .eyebrow,
+.status-cards .eyebrow,
+.aside-note > .eyebrow,
+.publish-summary .eyebrow,
+.qr-card > .eyebrow,
+.created-invite .eyebrow,
+.access-card > .eyebrow,
+.member-toolbar > .eyebrow,
+.bulletin-intro > .eyebrow,
+.document-section .section-heading > .eyebrow,
+.notes-section .eyebrow {
+  color: var(--ember-text);
+}
+/* Dark panels: logo-blue depth with a soft sky glow. */
+.sidebar,
+.sunday-card,
+.access-story {
+  background:
+    radial-gradient(120% 70% at 100% 0%, rgba(48, 198, 243, 0.22), transparent 60%),
+    radial-gradient(90% 60% at 0% 100%, rgba(244, 105, 33, 0.12), transparent 65%),
+    linear-gradient(160deg, #0b2c4d 0%, #0d3a63 100%);
+}
+.sidebar::before,
+.access-story::before,
+.workspace-header::after,
+.member-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--brand-stripe);
+}
+.sidebar::before,
+.access-story::before {
+  top: 0;
+}
+.workspace-header,
+.member-header {
+  position: relative;
+}
+.workspace-header::after,
+.member-header::after {
+  bottom: -1px;
+}
+.sidebar nav a:hover {
+  background: rgba(48, 198, 243, 0.1);
+}
+.sidebar nav a.active {
+  background: rgba(48, 198, 243, 0.14);
+  color: #fff;
+  border-left-color: var(--ember);
+}
+.sidebar nav a.active svg {
+  color: var(--sky);
+}
+.access-story em,
+.sunday-card em {
+  color: var(--ember);
 }
