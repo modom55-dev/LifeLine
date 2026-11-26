@@ -4,7 +4,17 @@ import { and, desc, eq, gt, isNull } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { bulletinSchema, CHURCH_SLUG, type ChurchInfo } from "@shared/bulletin";
-import { churches, churchBulletins, pilotInvites } from "../drizzle/schema";
+import { churches, churchBulletins, connectionCards, pilotInvites } from "../drizzle/schema";
+import {
+  CARD_INTERESTS,
+  cardInput,
+  listCards,
+  notAvailable,
+  recordCard,
+  unreadCount,
+} from "./connect";
+import { messagingConfig } from "./messaging";
+import { loadWeekFromSheet, SheetImportError, teamSheetId } from "./sheetImport";
 import { getDb } from "./db";
 import type { TrpcContext } from "./_core/context";
 import { ENV } from "./_core/env";
@@ -76,6 +86,23 @@ async function pilotChurch(db?: Executor) {
     });
   return church;
 }
+const isLaunched = (church: ChurchRow) => Boolean(church.launchedAt);
+/** Before launch only sample content is allowed; after launch real content is too. */
+function assertContentAllowed(church: ChurchRow, bulletin: { sampleData: boolean }) {
+  if (!isLaunched(church) && !bulletin.sampleData)
+    throw new TRPCError({
+      code: "BAD_REQUEST",
+      message:
+        "Open LifeLine to the congregation before saving real church content.",
+    });
+}
+async function hasMemberAccess(ctx: TrpcContext, church: ChurchRow) {
+  return (
+    isLaunched(church) ||
+    isOwner(ctx, church) ||
+    Boolean(await validatedInvite(church.id, tokenFromCookie(ctx)))
+  );
+}
 function isOwner(ctx: TrpcContext, church: ChurchRow) {
   return Boolean(
     ctx.user &&
@@ -111,7 +138,7 @@ function requireMutationHeader(ctx: TrpcContext) {
 const rateBuckets = new Map<string, { attempts: number; expires: number }>();
 const RATE_WINDOW = 15 * 60 * 1000;
 const MAX_BUCKETS = 1000;
-function limitAttempt(ctx: TrpcContext, operation: "claim" | "redeem") {
+function limitAttempt(ctx: TrpcContext, operation: "claim" | "redeem" | "card") {
   const now = Date.now();
   for (const [key, value] of rateBuckets)
     if (value.expires <= now) rateBuckets.delete(key);
@@ -126,7 +153,8 @@ function limitAttempt(ctx: TrpcContext, operation: "claim" | "redeem") {
     rateBuckets.set(key, bucket);
   }
   bucket.attempts += 1;
-  if (bucket.attempts > (operation === "claim" ? 10 : 20)) {
+  const limit = operation === "claim" ? 10 : operation === "card" ? 5 : 20;
+  if (bucket.attempts > limit) {
     throw new TRPCError({
       code: "TOO_MANY_REQUESTS",
       message: "Too many attempts. Try again later.",
@@ -206,6 +234,26 @@ async function workspace(db: Executor, church: ChurchRow) {
     publishedAt: record.publishedAt,
   };
 }
+export async function saveDraft(
+  db: Database,
+  church: ChurchRow,
+  bulletin: z.infer<typeof bulletinSchema>,
+  revision: number
+) {
+  return db.transaction(async tx => {
+    const [result] = await tx
+      .update(churchBulletins)
+      .set({ draft: bulletin, revision: revision + 1, savedAt: new Date() })
+      .where(
+        and(
+          eq(churchBulletins.churchId, church.id),
+          eq(churchBulletins.revision, revision)
+        )
+      );
+    if (result.affectedRows !== 1) throw conflict();
+    return workspace(tx, church);
+  });
+}
 function conflict() {
   return new TRPCError({
     code: "CONFLICT",
@@ -218,8 +266,7 @@ export const pilotRouter = router({
   status: publicProcedure.query(async ({ ctx }) => {
     const church = await pilotChurch();
     const owner = isOwner(ctx, church);
-    const access =
-      owner || Boolean(await validatedInvite(church.id, tokenFromCookie(ctx)));
+    const access = await hasMemberAccess(ctx, church);
     return {
       isOwner: owner,
       authenticated: Boolean(
@@ -231,7 +278,8 @@ export const pilotRouter = router({
       userEmail: ctx.user?.email ?? null,
       userName: ctx.user?.name ?? null,
       church: churchInfo(church),
-      pilotRestricted: true as const,
+      launched: isLaunched(church),
+      pilotRestricted: !isLaunched(church),
     };
   }),
   claimOwner: authenticatedMutation
@@ -347,6 +395,16 @@ export const pilotRouter = router({
       });
       return { id: result.insertId, token, expiresAt };
     }),
+  setLaunched: ownerMutation
+    .input(z.object({ open: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await database();
+      await db
+        .update(churches)
+        .set({ launchedAt: input.open ? new Date() : null })
+        .where(eq(churches.id, ctx.church.id));
+      return { launched: input.open };
+    }),
   revokeInvite: ownerMutation
     .input(z.object({ id: z.number().int().positive() }))
     .mutation(async ({ ctx, input }) => {
@@ -370,9 +428,10 @@ export const bulletinRouter = router({
   ),
   save: ownerMutation
     .input(
-      z.object({ bulletin: pilotBulletinSchema, revision: revisionSchema })
+      z.object({ bulletin: bulletinSchema, revision: revisionSchema })
     )
     .mutation(async ({ ctx, input }) => {
+      assertContentAllowed(ctx.church, input.bulletin);
       const db = await database();
       return db.transaction(async tx => {
         const [result] = await tx
@@ -404,7 +463,9 @@ export const bulletinRouter = router({
           .limit(1)
           .for("update");
         if (!record || record.revision !== input.revision) throw conflict();
-        const parsed = pilotBulletinSchema.safeParse(record.draft);
+        const parsed = (
+          isLaunched(ctx.church) ? bulletinSchema : pilotBulletinSchema
+        ).safeParse(record.draft);
         if (!parsed.success)
           throw new TRPCError({
             code: "BAD_REQUEST",
@@ -428,12 +489,34 @@ export const bulletinRouter = router({
         return workspace(tx, ctx.church);
       });
     }),
+  importFromSheet: ownerMutation
+    .input(z.object({ revision: revisionSchema }))
+    .mutation(async ({ ctx, input }) => {
+      if (!isLaunched(ctx.church))
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message:
+            "Open LifeLine to the congregation before loading real content from the team sheet.",
+        });
+      let loaded;
+      try {
+        loaded = await loadWeekFromSheet();
+      } catch (error) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message:
+            error instanceof SheetImportError
+              ? error.message
+              : "LifeLine couldn't reach the team sheet. Try again in a minute.",
+        });
+      }
+      const db = await database();
+      const result = await saveDraft(db, ctx.church, loaded.bulletin, input.revision);
+      return { ...result, tab: loaded.tab, skipped: loaded.skipped };
+    }),
   member: publicProcedure.query(async ({ ctx }) => {
     const church = await pilotChurch();
-    if (
-      !isOwner(ctx, church) &&
-      !(await validatedInvite(church.id, tokenFromCookie(ctx)))
-    ) {
+    if (!(await hasMemberAccess(ctx, church))) {
       throw new TRPCError({
         code: "FORBIDDEN",
         message:
@@ -455,4 +538,52 @@ export const bulletinRouter = router({
       publishedAt: record?.publishedAt ?? null,
     };
   }),
+});
+
+export const connectRouter = router({
+  submit: mutationProcedure
+    .use(({ ctx, next }) => {
+      limitAttempt(ctx, "card");
+      return next();
+    })
+    .input(cardInput)
+    .mutation(async ({ ctx, input }) => {
+      const church = await pilotChurch();
+      if (!(await hasMemberAccess(ctx, church))) throw notAvailable();
+      // Bots fill hidden fields; pretend success and store nothing.
+      if (input.website) return { success: true as const };
+      await recordCard(await database(), church.id, input);
+      return { success: true as const };
+    }),
+  options: publicProcedure.query(() => ({ interests: CARD_INTERESTS })),
+  inbox: ownerProcedure.query(async ({ ctx }) => {
+    const db = await database();
+    return {
+      cards: await listCards(db, ctx.church.id),
+      emailReady: messagingConfig.emailReady,
+      smsReady: messagingConfig.smsReady,
+      alertEmails: messagingConfig.alertEmails.length,
+      alertPhones: messagingConfig.alertPhones.length,
+      teamSheetUrl: `https://docs.google.com/spreadsheets/d/${teamSheetId()}/edit`,
+    };
+  }),
+  unread: ownerProcedure.query(async ({ ctx }) =>
+    unreadCount(await database(), ctx.church.id)
+  ),
+  markRead: ownerMutation
+    .input(z.object({ id: z.number().int().positive() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await database();
+      await db
+        .update(connectionCards)
+        .set({ readAt: new Date() })
+        .where(
+          and(
+            eq(connectionCards.id, input.id),
+            eq(connectionCards.churchId, ctx.church.id),
+            isNull(connectionCards.readAt)
+          )
+        );
+      return { success: true as const };
+    }),
 });

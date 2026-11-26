@@ -4,6 +4,7 @@ import { createServer } from "http";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { ensureSessionSecret } from "./sessionSecret";
+import { startWorker } from "../worker";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
@@ -67,9 +68,10 @@ async function startServer() {
     console.error("Server failed:", error.message);
     process.exit(1);
   });
-  server.listen(port, "0.0.0.0", () =>
-    console.log(`Server listening on port ${port}`)
-  );
+  server.listen(port, "0.0.0.0", () => {
+    console.log(`Server listening on port ${port}`);
+    if (process.env.NODE_ENV !== "test") startWorker();
+  });
 }
 
 startServer().catch(error => {

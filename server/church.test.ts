@@ -16,6 +16,7 @@ import { sampleBulletin, type Bulletin } from "@shared/bulletin";
 import {
   churches,
   churchBulletins,
+  connectionCards,
   pilotInvites,
   users,
 } from "../drizzle/schema";
@@ -165,6 +166,7 @@ describe.sequential(
         "church",
         "hasMemberAccess",
         "isOwner",
+        "launched",
         "ownerClaimed",
         "pilotRestricted",
         "userEmail",
@@ -730,6 +732,49 @@ describe.sequential(
           .update(churches)
           .set({ ownerOpenId: before.ownerOpenId, ownerClaimedAt: before.ownerClaimedAt })
           .where(eq(churches.id, churchId));
+      }
+    });
+
+    it("keeps cards and real content closed until the owner opens LifeLine, then allows both", async () => {
+      const owner = (await request({ session: ownerToken, ip: "203.0.113.120" })).caller;
+      const anonymous = (await request({ ip: "203.0.113.121" })).caller;
+      const card = {
+        name: "Test Guest",
+        email: "guest@example.org",
+        phone: "",
+        firstTime: true,
+        interests: ["Prayer" as const],
+        prayerRequest: "",
+        followUpOk: false,
+      };
+      const workspace = await owner.bulletin.workspace();
+      const real = { ...workspace.draft, sampleData: false };
+      try {
+        expect((await anonymous.pilot.status()).hasMemberAccess).toBe(false);
+        await expect(anonymous.connect.submit(card)).rejects.toMatchObject(errorCode("FORBIDDEN"));
+        await expect(
+          owner.bulletin.save({ bulletin: real, revision: workspace.revision })
+        ).rejects.toMatchObject(errorCode("BAD_REQUEST"));
+        await expect(anonymous.pilot.setLaunched({ open: true })).rejects.toMatchObject(
+          errorCode("UNAUTHORIZED")
+        );
+
+        expect(await owner.pilot.setLaunched({ open: true })).toEqual({ launched: true });
+        const status = await anonymous.pilot.status();
+        expect(status).toMatchObject({ launched: true, hasMemberAccess: true, pilotRestricted: false });
+        expect((await anonymous.bulletin.member()).church.id).toBe(churchId);
+        expect(await anonymous.connect.submit(card)).toEqual({ success: true });
+        // Honeypot submissions are accepted silently but never stored.
+        const before = (await owner.connect.inbox()).cards.length;
+        await anonymous.connect.submit({ ...card, website: "spam" });
+        expect((await owner.connect.inbox()).cards.length).toBe(before);
+        await expect(anonymous.connect.inbox()).rejects.toMatchObject(errorCode("UNAUTHORIZED"));
+        const saved = await owner.bulletin.save({ bulletin: real, revision: workspace.revision });
+        expect(saved.draft.sampleData).toBe(false);
+        expect(await owner.connect.unread()).toBeGreaterThan(0);
+      } finally {
+        await owner.pilot.setLaunched({ open: false });
+        await db.delete(connectionCards).where(eq(connectionCards.churchId, churchId));
       }
     });
   }

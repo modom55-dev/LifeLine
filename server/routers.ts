@@ -2,7 +2,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { z } from "zod";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { publicProcedure, router } from "./_core/trpc";
-import { bulletinRouter, mutationProcedure, pilotRouter } from "./church";
+import { bulletinRouter, connectRouter, mutationProcedure, pilotRouter } from "./church";
 
 export const appRouter = router({
   // Keep the starter health contract; this pilot deliberately has no email/notification feature.
@@ -21,6 +21,7 @@ export const appRouter = router({
   }),
   pilot: pilotRouter,
   bulletin: bulletinRouter,
+  connect: connectRouter,
 });
 
 export type AppRouter = typeof appRouter;

@@ -12,7 +12,78 @@ import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { copyText, Modal } from "@/components/Actions";
 
+function LaunchCard() {
+  const status = trpc.pilot.status.useQuery();
+  const utils = trpc.useUtils();
+  const [confirm, setConfirm] = useState(false);
+  const setLaunched = trpc.pilot.setLaunched.useMutation({
+    onSuccess: async d => {
+      setConfirm(false);
+      await utils.pilot.status.invalidate();
+      await utils.bulletin.member.invalidate();
+      toast.success(
+        d.launched
+          ? "LifeLine is open to the congregation."
+          : "LifeLine is back to a private pilot."
+      );
+    },
+    onError: e => toast.error(e.message),
+  });
+  const launched = !!status.data?.launched;
+  return (
+    <section className={`launch-card ${launched ? "is-live" : ""}`}>
+      <div>
+        <span className="eyebrow">{launched ? "LIVE" : "PRIVATE PILOT"}</span>
+        <h2>
+          {launched
+            ? "Open to the congregation"
+            : "Ready to share with the congregation?"}
+        </h2>
+        <p>
+          {launched
+            ? "Anyone with the bulletin link or QR code can read the published bulletin and send a Connection Card. Editing stays with your account only."
+            : "Opening LifeLine lets anyone with the bulletin link or QR code read it, without an invitation. It also lets you load real content from the team sheet and turns on Connection Cards."}
+        </p>
+      </div>
+      <button
+        className={launched ? "button secondary" : "button primary"}
+        onClick={() => setConfirm(true)}
+        disabled={status.isLoading || setLaunched.isPending}
+      >
+        {launched ? "Return to private pilot" : "Open to the congregation"}
+      </button>
+      <Modal
+        open={confirm}
+        onClose={() => setConfirm(false)}
+        title={launched ? "Return to a private pilot?" : "Open LifeLine to the congregation?"}
+        description={
+          launched
+            ? "Members without an invitation will no longer see the bulletin, and new Connection Cards will pause. Saved cards stay in your inbox."
+            : "The published bulletin becomes readable by anyone with the link. Make sure this week's content is real and approved before you publish."
+        }
+      >
+        <div className="button-row">
+          <button className="button secondary" onClick={() => setConfirm(false)}>
+            Cancel
+          </button>
+          <button
+            className="button primary"
+            onClick={() => setLaunched.mutate({ open: !launched })}
+            disabled={setLaunched.isPending}
+          >
+            {setLaunched.isPending ? (
+              <Loader2 className="spin" size={16} />
+            ) : null}
+            {launched ? "Return to pilot" : "Yes, open it"}
+          </button>
+        </div>
+      </Modal>
+    </section>
+  );
+}
+
 export default function PilotAccess() {
+  const liveStatus = trpc.pilot.status.useQuery();
   const query = trpc.pilot.invites.useQuery();
   const utils = trpc.useUtils();
   const [label, setLabel] = useState("");
@@ -50,9 +121,13 @@ export default function PilotAccess() {
           <p>Keep your pilot in the hands of people you trust.</p>
         </div>
         <span className="large-status">
-          <ShieldCheck size={18} /> Restricted to authorized testers
+          <ShieldCheck size={18} />{" "}
+          {liveStatus.data?.launched
+            ? "Open to the congregation"
+            : "Restricted to authorized testers"}
         </span>
       </div>
+      <LaunchCard />
       <div className="access-management-grid">
         <section className="form-card">
           <div className="form-card-heading">

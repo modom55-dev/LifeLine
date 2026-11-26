@@ -13,6 +13,7 @@ import {
   CalendarDays,
   Link2,
   AlertCircle,
+  Sheet,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -82,7 +83,11 @@ export default function Editor({ data }: { data: WorkspaceData }) {
       utils.bulletin.workspace.setData(undefined, d);
       await utils.bulletin.member.invalidate();
       setPublishing(false);
-      toast.success("Published to the restricted pilot member view.");
+      toast.success(
+        launched
+          ? "Published. The congregation now sees this bulletin."
+          : "Published to the restricted pilot member view."
+      );
     },
     onError: e => toast.error(e.message),
   });
@@ -103,7 +108,37 @@ export default function Editor({ data }: { data: WorkspaceData }) {
       /* Mutation displays the error; preserve unsaved text. */
     }
   }
-  const busy = save.isPending || publish.isPending;
+  const status = trpc.pilot.status.useQuery();
+  const launched = !!status.data?.launched;
+  const importSheet = trpc.bulletin.importFromSheet.useMutation({
+    onSuccess: d => {
+      setRevision(d.revision);
+      setDraft(d.draft);
+      setBaseline(d.draft);
+      setConflicted(false);
+      utils.bulletin.workspace.setData(undefined, d);
+      toast.success(
+        `Loaded the "${d.tab}" tab into your draft. Preview it, then publish when ready.`
+      );
+      if (d.skipped.length)
+        toast.warning(`Skipped: ${d.skipped.join("; ")}`);
+    },
+    onError: e => {
+      if (e.data?.code === "CONFLICT") setConflicted(true);
+      toast.error(e.message);
+    },
+  });
+  function loadFromSheet() {
+    if (
+      dirty &&
+      !window.confirm(
+        "Load this week from the team sheet? Your unsaved changes here will be replaced."
+      )
+    )
+      return;
+    importSheet.mutate({ revision });
+  }
+  const busy = save.isPending || publish.isPending || importSheet.isPending;
   async function loadLatest() {
     if (
       dirty &&
@@ -132,6 +167,21 @@ export default function Editor({ data }: { data: WorkspaceData }) {
           <p>Shape the details. Save a draft. Share when you’re ready.</p>
         </div>
         <div className="button-row">
+          {launched && (
+            <button
+              className="button secondary"
+              onClick={loadFromSheet}
+              disabled={busy}
+              title="Pull this Sunday's tab from the WLCC Weekly Bulletin sheet into the draft"
+            >
+              {importSheet.isPending ? (
+                <Loader2 className="spin" size={16} />
+              ) : (
+                <Sheet size={16} />
+              )}{" "}
+              Load from team sheet
+            </button>
+          )}
           <button
             className="button secondary"
             onClick={() => saveDraft(true)}
@@ -166,8 +216,8 @@ export default function Editor({ data }: { data: WorkspaceData }) {
           )}
         </span>
         <span>
-          Revision {revision} <span className="small-divider" /> Sample data
-          only
+          Revision {revision} <span className="small-divider" />{" "}
+          {draft.sampleData ? "Sample data" : "Church content"}
         </span>
         <button
           className="text-button"
@@ -504,7 +554,11 @@ export default function Editor({ data }: { data: WorkspaceData }) {
             <ol>
               <li>
                 <strong>Edit the details</strong>
-                <span>All pilot content is labeled sample data.</span>
+                <span>
+                  {launched
+                    ? "Or load this Sunday from the team sheet."
+                    : "All pilot content is labeled sample data."}
+                </span>
               </li>
               <li>
                 <strong>Save your draft</strong>
@@ -521,19 +575,32 @@ export default function Editor({ data }: { data: WorkspaceData }) {
               <li>
                 <strong>Publish with care</strong>
                 <span>
-                  Only invited testers can see the published pilot bulletin.
+                  {launched
+                    ? "Members see it at your bulletin link and QR code."
+                    : "Only invited testers can see the published pilot bulletin."}
                 </span>
               </li>
             </ol>
           </div>
-          <div className="quiet-card">
-            <AlertCircle size={18} />
-            <p>
-              <strong>Preview is not a public launch.</strong> Publishing a
-              bulletin updates this restricted pilot only. Public access still
-              requires approval.
-            </p>
-          </div>
+          {launched ? (
+            <label className="check-line">
+              <input
+                type="checkbox"
+                checked={draft.sampleData}
+                onChange={e => update("sampleData", e.target.checked)}
+              />
+              Label this bulletin as sample content
+            </label>
+          ) : (
+            <div className="quiet-card">
+              <AlertCircle size={18} />
+              <p>
+                <strong>Preview is not a public launch.</strong> Publishing a
+                bulletin updates this restricted pilot only. Open LifeLine to the
+                congregation from Access when you're ready.
+              </p>
+            </div>
+          )}
           <button
             className="button primary wide"
             onClick={() => setPublishing(true)}
@@ -571,10 +638,16 @@ export default function Editor({ data }: { data: WorkspaceData }) {
         open={publishing}
         onClose={() => setPublishing(false)}
         title="Ready for this Sunday?"
-        description="This publishes the saved draft to invited pilot testers. It does not launch a public website."
+        description={
+          launched
+            ? "This publishes the saved draft to the congregation's bulletin link."
+            : "This publishes the saved draft to invited pilot testers. It does not launch a public website."
+        }
       >
         <div className="publish-summary">
-          <span className="eyebrow">SAMPLE BULLETIN</span>
+          <span className="eyebrow">
+            {data.draft.sampleData ? "SAMPLE BULLETIN" : "THIS SUNDAY"}
+          </span>
           <h3>{data.draft.sermonTitle}</h3>
           <p>
             {data.draft.scripture} · {data.draft.serviceTime}

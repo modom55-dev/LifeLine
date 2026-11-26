@@ -19,6 +19,8 @@ import {
   X,
   CalendarDays,
   Send,
+  Inbox,
+  Globe2,
 } from "lucide-react";
 import { useState } from "react";
 import ChurchReference, {
@@ -33,13 +35,15 @@ import { formatDate } from "@shared/bulletin";
 import Editor, { type WorkspaceData } from "./Editor";
 import Sharing from "./Sharing";
 import PilotAccess from "./PilotAccess";
+import Cards from "./Cards";
 import Access, { LoadingState, ErrorState } from "./Access";
 
 const navigation = [
   { path: "/admin", label: "Overview", icon: LayoutDashboard },
   { path: "/admin/editor", label: "Weekly bulletin", icon: FileText },
+  { path: "/admin/cards", label: "Connection cards", icon: Inbox },
   { path: "/admin/share", label: "Sharing & QR code", icon: QrCode },
-  { path: "/admin/access", label: "Pilot access", icon: ShieldCheck },
+  { path: "/admin/access", label: "Access", icon: ShieldCheck },
 ];
 function relativeTime(date: Date) {
   return new Date(date).toLocaleString("en-US", {
@@ -49,7 +53,7 @@ function relativeTime(date: Date) {
     minute: "2-digit",
   });
 }
-function Overview({ data: d }: { data: WorkspaceData }) {
+function Overview({ data: d, launched }: { data: WorkspaceData; launched: boolean }) {
   const bulletin = d.published || d.draft;
   const hasDraftChanges =
     JSON.stringify(d.draft) !== JSON.stringify(d.published);
@@ -82,7 +86,11 @@ function Overview({ data: d }: { data: WorkspaceData }) {
             <h2>{bulletin.sermonTitle}</h2>
             <p className="sunday-scripture">{bulletin.scripture}</p>
             <div className="sunday-card-bottom">
-              <span className="sample-pill">SAMPLE CONTENT</span>
+              {bulletin.sampleData ? (
+                <span className="sample-pill">SAMPLE CONTENT</span>
+              ) : (
+                <span className="sample-pill live-pill">THIS SUNDAY</span>
+              )}
               <Link href="/c/wholelife">
                 View member bulletin <ArrowUpRight size={18} />
               </Link>
@@ -108,9 +116,13 @@ function Overview({ data: d }: { data: WorkspaceData }) {
               <span className="status-card-icon">
                 <ShieldCheck size={19} />
               </span>
-              <span className="eyebrow">PILOT ACCESS</span>
-              <h3>Invite only</h3>
-              <p>Private preview. No public launch.</p>
+              <span className="eyebrow">ACCESS</span>
+              <h3>{launched ? "Open to the congregation" : "Invite only"}</h3>
+              <p>
+                {launched
+                  ? "Anyone with the bulletin link can read it."
+                  : "Private preview. No public launch."}
+              </p>
             </div>
           </div>
           <section className="workspace-section">
@@ -152,7 +164,10 @@ function Overview({ data: d }: { data: WorkspaceData }) {
                 </span>
                 <div>
                   <strong>Coming together</strong>
-                  <span>{d.draft.events.length} upcoming sample events</span>
+                  <span>
+                    {d.draft.events.length} upcoming{" "}
+                    {d.draft.sampleData ? "sample " : ""}events
+                  </span>
                 </div>
                 <ArrowRight size={17} />
               </Link>
@@ -181,7 +196,9 @@ function Overview({ data: d }: { data: WorkspaceData }) {
                 <ChurchLogo className="phone-church-logo" />
                 <span>WholeLife</span>
               </div>
-              <span className="phone-sample">SAMPLE BULLETIN</span>
+              {bulletin.sampleData && (
+                <span className="phone-sample">SAMPLE BULLETIN</span>
+              )}
               <span className="eyebrow">SUNDAY AT WHOLELIFE</span>
               <h3>
                 WholeLife
@@ -321,6 +338,10 @@ export default function Workspace() {
   const query = trpc.bulletin.workspace.useQuery(undefined, {
     enabled: !!status.data?.isOwner,
   });
+  const unread = trpc.connect.unread.useQuery(undefined, {
+    enabled: !!status.data?.isOwner,
+    refetchInterval: 60_000,
+  });
   const utils = trpc.useUtils();
   const logout = trpc.auth.logout.useMutation({
     onSuccess: async () => {
@@ -392,21 +413,39 @@ export default function Workspace() {
               <n.icon size={18} />
               {n.label}
               {n.path === "/admin/editor" && <span className="nav-dot" />}
+              {n.path === "/admin/cards" && !!unread.data && (
+                <span className="nav-count">{unread.data}</span>
+              )}
             </Link>
           ))}
         </nav>
         <div className="sidebar-bottom">
           <div className="pilot-sidebar-card">
-            <span>
-              <ShieldCheck size={17} /> A thoughtful pilot
-            </span>
-            <p>
-              A private space to get things right.
-              <br />
-              Sample data. Invited testers only.
-            </p>
+            {status.data.launched ? (
+              <>
+                <span>
+                  <Globe2 size={17} /> Live for WholeLife
+                </span>
+                <p>
+                  Open to the congregation.
+                  <br />
+                  Editing stays with you.
+                </p>
+              </>
+            ) : (
+              <>
+                <span>
+                  <ShieldCheck size={17} /> A thoughtful pilot
+                </span>
+                <p>
+                  A private space to get things right.
+                  <br />
+                  Sample data. Invited testers only.
+                </p>
+              </>
+            )}
             <Link href="/admin/access">
-              Manage pilot access <ArrowRight size={14} />
+              Manage access <ArrowRight size={14} />
             </Link>
           </div>
           <Link
@@ -453,26 +492,36 @@ export default function Workspace() {
             <span className="header-service">
               <Clock3 size={14} /> Sunday · {d.church.serviceTime}
             </span>
-            <span className="pilot-chip">
-              <LockKeyhole size={12} /> PRIVATE PILOT
-            </span>
+            {status.data.launched ? (
+              <span className="pilot-chip live-chip">
+                <Globe2 size={12} /> LIVE
+              </span>
+            ) : (
+              <span className="pilot-chip">
+                <LockKeyhole size={12} /> PRIVATE PILOT
+              </span>
+            )}
           </div>
         </header>
-        <div className="sample-banner no-print">
-          <span>
-            <span className="sample-dot" />
-            <strong>A space to explore.</strong> You’re viewing sample data, not
-            confirmed church information.
-          </span>
-          <span>
-            No public launch <ShieldCheck size={13} />
-          </span>
-        </div>
+        {!status.data.launched && (
+          <div className="sample-banner no-print">
+            <span>
+              <span className="sample-dot" />
+              <strong>A space to explore.</strong> You’re viewing sample data,
+              not confirmed church information.
+            </span>
+            <span>
+              No public launch <ShieldCheck size={13} />
+            </span>
+          </div>
+        )}
         <main className="workspace-main">
           {section === "editor" ? (
             <Editor data={d} />
           ) : section === "share" ? (
             <Sharing data={d} />
+          ) : section === "cards" ? (
+            <Cards />
           ) : section === "access" ? (
             <PilotAccess />
           ) : section === "guide" ? (
@@ -509,7 +558,7 @@ export default function Workspace() {
               </div>
             </>
           ) : section === "overview" ? (
-            <Overview data={d} />
+            <Overview data={d} launched={!!status.data.launched} />
           ) : (
             <ErrorState
               message="That workspace section does not exist."

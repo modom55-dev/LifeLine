@@ -1,4 +1,5 @@
 import {
+  boolean,
   datetime,
   int,
   json,
@@ -25,7 +26,7 @@ export const users = mysqlTable("users", {
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
-// No role fallback: the authenticated Manus openId must match this exact owner.
+// No role fallback: the authenticated Google openId must match this exact owner.
 export const churches = mysqlTable("churches", {
   id: int("id").autoincrement().primaryKey(),
   slug: varchar("slug", { length: 80 }).notNull().unique(),
@@ -40,6 +41,8 @@ export const churches = mysqlTable("churches", {
   }),
   ownerClaimedAt: datetime("ownerClaimedAt", { mode: "date", fsp: 3 }),
   seedVersion: int("seedVersion").default(1).notNull(),
+  /** Set when the owner opens LifeLine to the whole congregation. Null = private pilot. */
+  launchedAt: datetime("launchedAt", { mode: "date", fsp: 3 }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
@@ -79,3 +82,46 @@ export const appSettings = mysqlTable("appSettings", {
   value: varchar("value", { length: 256 }).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
+
+/** Connection Cards submitted from the member bulletin. Private to the owner. */
+export const connectionCards = mysqlTable(
+  "connectionCards",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    churchId: int("churchId")
+      .notNull()
+      .references(() => churches.id, { onDelete: "cascade" }),
+    name: varchar("name", { length: 120 }).notNull(),
+    email: varchar("email", { length: 254 }),
+    phone: varchar("phone", { length: 40 }),
+    firstTime: boolean("firstTime").default(false).notNull(),
+    interests: json("interests").$type<string[]>().notNull(),
+    prayerRequest: text("prayerRequest"),
+    followUpOk: boolean("followUpOk").default(false).notNull(),
+    createdAt: datetime("createdAt", { mode: "date", fsp: 3 }).notNull(),
+    readAt: datetime("readAt", { mode: "date", fsp: 3 }),
+  },
+  table => [index("connectionCards_churchId_idx").on(table.churchId)]
+);
+
+/** Outgoing alerts and follow-ups. Sent by the background worker when due. */
+export const outboundMessages = mysqlTable(
+  "outboundMessages",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    cardId: int("cardId").references(() => connectionCards.id, {
+      onDelete: "cascade",
+    }),
+    channel: mysqlEnum("channel", ["email", "sms"]).notNull(),
+    kind: varchar("kind", { length: 40 }).notNull(),
+    recipient: varchar("recipient", { length: 254 }).notNull(),
+    subject: varchar("subject", { length: 200 }),
+    body: text("body").notNull(),
+    sendAfter: datetime("sendAfter", { mode: "date", fsp: 3 }).notNull(),
+    sentAt: datetime("sentAt", { mode: "date", fsp: 3 }),
+    attempts: int("attempts").default(0).notNull(),
+    lastError: varchar("lastError", { length: 300 }),
+    createdAt: datetime("createdAt", { mode: "date", fsp: 3 }).notNull(),
+  },
+  table => [index("outboundMessages_due_idx").on(table.sentAt, table.sendAfter)]
+);

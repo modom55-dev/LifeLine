@@ -1,8 +1,9 @@
-import { Printer, ArrowLeft, LockKeyhole, LogOut } from "lucide-react";
+import { Printer, ArrowLeft, LockKeyhole, LogOut, HeartHandshake } from "lucide-react";
 import { useLocation } from "wouter";
 import ChurchReference from "@/components/ChurchReference";
 import Brand from "@/components/Brand";
 import BulletinView from "@/components/BulletinView";
+import ConnectionCardForm from "@/components/ConnectionCardForm";
 import { NewsletterButton } from "@/components/Actions";
 import { trpc } from "@/lib/trpc";
 import Access, { LoadingState, ErrorState } from "./Access";
@@ -45,6 +46,10 @@ export default function Member() {
             <button className="text-button" onClick={() => navigate("/admin")}>
               <ArrowLeft size={16} /> Owner workspace
             </button>
+          ) : status.data.launched ? (
+            <a className="text-button" href="#connect">
+              <HeartHandshake size={16} /> Connection Card
+            </a>
           ) : (
             <button
               className="text-button"
@@ -54,9 +59,11 @@ export default function Member() {
               <LogOut size={16} /> Leave pilot
             </button>
           )}
-          <span className="pilot-chip">
-            <LockKeyhole size={12} /> PRIVATE PILOT
-          </span>
+          {!status.data.launched && (
+            <span className="pilot-chip">
+              <LockKeyhole size={12} /> PRIVATE PILOT
+            </span>
+          )}
         </div>
       </header>
       <main className="member-main">
@@ -75,6 +82,7 @@ export default function Member() {
               </div>
             </div>
             <BulletinView bulletin={d.bulletin} church={d.church} notes />
+            <ConnectionCardForm />
             <ChurchReference />
           </>
         ) : (
