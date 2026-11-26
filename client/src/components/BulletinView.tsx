@@ -43,7 +43,7 @@ export function LocalNotes({
     }
   }
   return (
-    <section className="notes-section no-print">
+    <section className="notes-section no-print" id="notes">
       <div className="section-heading">
         <div>
           <span className="eyebrow">A MOMENT TO REFLECT</span>

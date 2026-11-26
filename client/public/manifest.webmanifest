@@ -1,0 +1,15 @@
+{
+  "name": "WholeLife LifeLine",
+  "short_name": "WholeLife",
+  "description": "WholeLife Community Church weekly bulletin, giving, livestream and Connection Card.",
+  "start_url": "/c/wholelife",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#30c6f3",
+  "icons": [
+    { "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/brand/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/brand/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

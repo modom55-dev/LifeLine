@@ -4,6 +4,7 @@ import ChurchReference from "@/components/ChurchReference";
 import Brand from "@/components/Brand";
 import BulletinView from "@/components/BulletinView";
 import ConnectionCardForm from "@/components/ConnectionCardForm";
+import { MobileActionBar, HomeScreenTip } from "@/components/MobileBar";
 import { NewsletterButton } from "@/components/Actions";
 import { trpc } from "@/lib/trpc";
 import Access, { LoadingState, ErrorState } from "./Access";
@@ -69,6 +70,7 @@ export default function Member() {
       <main className="member-main">
         {d?.bulletin ? (
           <>
+            <HomeScreenTip />
             <div className="member-toolbar no-print">
               <span className="eyebrow">YOUR WEEKLY BULLETIN</span>
               <div className="button-row">
@@ -84,6 +86,10 @@ export default function Member() {
             <BulletinView bulletin={d.bulletin} church={d.church} notes />
             <ConnectionCardForm />
             <ChurchReference />
+            <MobileActionBar
+              givingUrl={d.bulletin.givingUrl}
+              livestreamUrl={d.bulletin.livestreamUrl}
+            />
           </>
         ) : (
           <section className="empty-state">

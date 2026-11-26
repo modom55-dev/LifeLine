@@ -3682,3 +3682,171 @@ textarea {
   border-color: var(--ember);
   background: var(--ember);
 }
+
+/* ── Phone view for members (Nov 2026): larger type and tap targets for
+   older eyes, a bottom action bar, and a home-screen tip. ───────────── */
+.mobile-action-bar,
+.homescreen-tip {
+  display: none;
+}
+@media (max-width: 720px) {
+  .member-page {
+    font-size: 17px;
+    padding-bottom: calc(88px + env(safe-area-inset-bottom));
+  }
+  .member-page #connect,
+  .member-page #notes {
+    scroll-margin-top: 16px;
+  }
+  /* Header */
+  .member-header .wordmark { font-size: 28px; }
+  .member-header .brand-tagline { font-size: 12px; }
+  .member-header .brand-byline { font-size: 10px; }
+  .member-header-actions .text-button { font-size: 15px; min-height: 44px; }
+  .member-header-actions a.text-button[href="#connect"] { display: none; } /* the bottom bar has Connect */
+  .member-header .pilot-chip { font-size: 11px; padding: 5px 9px; }
+  /* Toolbar and labels */
+  .member-page .eyebrow,
+  .member-toolbar > .eyebrow,
+  .bulletin-intro > .eyebrow,
+  .sermon-section > .eyebrow,
+  .document-section .section-heading > .eyebrow,
+  .notes-section .eyebrow,
+  .member-page .church-reference > summary .eyebrow,
+  .reference-mission > .eyebrow,
+  .ministry-reference .eyebrow {
+    font-size: 13px;
+    letter-spacing: 1.2px;
+  }
+  .member-toolbar { flex-wrap: wrap; gap: 12px; }
+  .member-toolbar .button,
+  .member-page .button {
+    font-size: 16px;
+    min-height: 48px;
+    padding: 0 18px;
+  }
+  .member-page .text-button { font-size: 16px; min-height: 44px; }
+  .sample-notice { font-size: 13px; line-height: 1.5; }
+  .sample-notice > span:last-child { font-size: 13px; }
+  /* Bulletin body */
+  .bulletin-intro h1 { font-size: 38px; line-height: 1.1; }
+  .bulletin-intro > p,
+  .bulletin-contact,
+  .member-page .church-contact { font-size: 16px; }
+  .bulletin-date { font-size: 15px; }
+  .sermon-section h2 { font-size: 38px; line-height: 1.1; }
+  .scripture-reference { font-size: 18px; }
+  .speaker { font-size: 15px; }
+  .sermon-summary { font-size: 18px; line-height: 1.6; }
+  .document-section h2 { font-size: 30px; }
+  .announcement h3,
+  .event h3 { font-size: 24px; line-height: 1.2; }
+  .announcement p,
+  .event p { font-size: 17px; line-height: 1.6; }
+  .event .event-meta { font-size: 15px; }
+  .event-date span { font-size: 12px; }
+  .announcement-index { font-size: 22px; }
+  .member-links { grid-template-columns: 1fr; }
+  .member-links h3 { font-size: 26px; }
+  .member-links p,
+  .member-links .text-button { font-size: 17px; }
+  /* Notes */
+  .notes-section h2 { font-size: 30px; }
+  .notes-section > .muted { font-size: 16px; }
+  .notes-section textarea { font-size: 18px; min-height: 180px; }
+  .notes-footer,
+  .notes-footer .text-button { font-size: 15px; }
+  .notes-section .fine-print { font-size: 14px; }
+  /* Connection Card */
+  .connection-heading h2,
+  .connection-done h2 { font-size: 30px; }
+  .connection-card p { font-size: 17px; }
+  .connection-card label,
+  .interest-chips legend { font-size: 16px; }
+  .connection-card input,
+  .connection-card textarea {
+    font-size: 18px; /* 16px+ also stops iPhones from zooming in */
+    min-height: 50px;
+  }
+  .check-line,
+  .check-line.big { font-size: 17px; min-height: 44px; }
+  .check-line input { width: 24px; height: 24px; min-height: 0; }
+  .interest-chips button { font-size: 16px; min-height: 46px; padding: 0 16px; }
+  .member-page .fine-print { font-size: 14px; }
+  /* About the church + footers */
+  .reference-mission > p { font-size: 26px; }
+  .reference-scripture,
+  .reference-address,
+  .reference-leadership,
+  .reference-mission > .text-button { font-size: 16px; }
+  .reference-leadership > .fine-print,
+  .ministry-reference .fine-print,
+  .reference-source { font-size: 13px; }
+  .bulletin-footer { font-size: 22px; }
+  .bulletin-footer > span,
+  .member-page-footer { font-size: 13px; }
+  .member-page-footer { flex-direction: column; gap: 4px; padding: 20px; }
+
+  /* Bottom action bar */
+  .mobile-action-bar {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    background: #fff;
+    border-top: 3px solid var(--sky);
+    box-shadow: 0 -6px 20px #0b2c4d1f;
+    padding: 6px 6px calc(6px + env(safe-area-inset-bottom));
+  }
+  .mobile-action-bar a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    min-height: 64px;
+    border-radius: 12px;
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .mobile-action-bar a svg { color: var(--ember-text); }
+  .mobile-action-bar a:active { background: var(--sky-soft); }
+
+  /* Home-screen tip */
+  .homescreen-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--sky-soft);
+    border: 1px solid #bfe8f7;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 18px;
+  }
+  .homescreen-tip img {
+    width: 48px;
+    height: 48px;
+    border-radius: 11px;
+    flex: none;
+    box-shadow: 0 2px 6px #0b2c4d22;
+  }
+  .homescreen-tip strong { font-size: 17px; display: block; }
+  .homescreen-tip p { margin: 4px 0 0; font-size: 16px; line-height: 1.5; }
+  .homescreen-tip p { display: block; }
+  .homescreen-tip p svg { display: inline-block; vertical-align: -3px; }
+  .homescreen-tip > div { flex: 1; min-width: 0; }
+  .homescreen-tip button {
+    background: none;
+    border: 0;
+    color: var(--navy);
+    width: 44px;
+    height: 44px;
+    flex: none;
+    margin: -8px -8px 0 0;
+  }
+}
