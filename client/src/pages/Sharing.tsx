@@ -10,10 +10,12 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { copyText, NewsletterButton } from "@/components/Actions";
+import { trpc } from "@/lib/trpc";
 import type { WorkspaceData } from "./Editor";
 
 export default function Sharing({ data: d }: { data: WorkspaceData }) {
   const url = `${window.location.origin}/c/wholelife`;
+  const launched = !!trpc.pilot.status.useQuery().data?.launched;
   const qr = useRef<HTMLDivElement>(null);
   function download() {
     const svg = qr.current?.querySelector("svg");
@@ -73,7 +75,68 @@ export default function Sharing({ data: d }: { data: WorkspaceData }) {
               next Sunday’s draft will not change this link.
             </p>
             <label>
-              Stable pilot bulletin URL
+              {launched ? "Congregation bulletin link" : "Stable pilot bulletin URL"}
+              <input
+                value={url}
+                readOnly
+                onFocus={e => e.target.select()}
+                aria-label="Stable congregation URL"
+              />
+            </label>
+            <div className="button-row">
+              <button className="button primary" onClick={() => copyText(url)}>
+                <Copy size={16} /> Copy link
+              </button>
+              <Link href="/c/wholelife" className="button secondary">
+                Open bulletin <ArrowUpRight size={16} />
+              </Link>
+            </div>
+          </section>
+          {launched ? (
+            <div className="quiet-card">
+              <QrCode size={23} />
+              <div>
+                <h3>Open to the congregation.</h3>
+                <p>
+                  Anyone with this link or QR code can read the latest published
+                  bulletin. No sign-in needed. Put the QR code in the printed
+                  bulletin or on the screen, and send the link by One Call Now or
+                  text.
+                </p>
+                <p>
+                  On a phone, members can tap “Add to Home Screen” to keep a
+                  WholeLife icon that opens the bulletin like an app.
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="quiet-card">
+              <LockKeyhole size={23} />
+              <div>
+                <h3>Private pilot.</h3>
+                <p>
+                  Only invited testers can open the bulletin right now. The QR
+                  code doesn’t contain an access secret; testers first open their
+                  private invitation in the same browser.
+                </p>
+                <Link className="text-button" href="/admin/access">
+                  Open to the congregation or invite testers{" "}
+                  <ArrowUpRight size={14} />
+                </Link>
+              </div>
+            </div>
+          )}
+          <section className="form-card">
+            <div className="form-card-heading">
+              <QrCode size={19} />
+              <h2>Your congregation link</h2>
+            </div>
+            <p>
+              This route always shows the latest published bulletin. Publishing
+              next Sunday’s draft will not change this link.
+            </p>
+            <label>
+              {launched ? "Congregation bulletin link" : "Stable pilot bulletin URL"}
               <input
                 value={url}
                 readOnly
@@ -114,7 +177,7 @@ export default function Sharing({ data: d }: { data: WorkspaceData }) {
             <h2>Other ways to share</h2>
             <p>
               Print a clean bulletin or copy a plain-text newsletter from the
-              published snapshot. No emails are sent by the app.
+              published bulletin. The app doesn’t email the bulletin itself.
             </p>
             <div className="button-row">
               <Link href="/c/wholelife" className="button secondary">
