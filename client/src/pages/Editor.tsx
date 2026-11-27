@@ -91,22 +91,29 @@ export default function Editor({ data }: { data: WorkspaceData }) {
     },
     onError: e => toast.error(e.message),
   });
-  async function saveDraft(preview = false) {
+  async function saveDraft(preview = false): Promise<boolean> {
     const result = bulletinSchema.safeParse(draft);
     if (!result.success) {
       setErrors(
         result.error.issues.map(e => `${e.path.join(" → ")}: ${e.message}`)
       );
       toast.error("Please review the highlighted bulletin details.");
-      return;
+      return false;
     }
     setErrors([]);
     try {
       await save.mutateAsync({ bulletin: result.data, revision });
       if (preview) navigate("/admin/preview");
+      return true;
     } catch {
       /* Mutation displays the error; preserve unsaved text. */
+      return false;
     }
+  }
+  /** One button: saves any unsaved edits, then asks to confirm publishing. */
+  async function startPublish() {
+    if (dirty && !(await saveDraft())) return;
+    setPublishing(true);
   }
   const status = trpc.pilot.status.useQuery();
   const launched = !!status.data?.launched;
@@ -139,6 +146,8 @@ export default function Editor({ data }: { data: WorkspaceData }) {
     importSheet.mutate({ revision });
   }
   const busy = save.isPending || publish.isPending || importSheet.isPending;
+  const notLive =
+    dirty || JSON.stringify(data.draft) !== JSON.stringify(data.published);
   async function loadLatest() {
     if (
       dirty &&
@@ -190,7 +199,7 @@ export default function Editor({ data }: { data: WorkspaceData }) {
             <Eye size={16} /> Preview
           </button>
           <button
-            className="button primary"
+            className="button secondary"
             onClick={() => saveDraft()}
             disabled={busy}
           >
@@ -201,8 +210,38 @@ export default function Editor({ data }: { data: WorkspaceData }) {
             )}{" "}
             Save draft
           </button>
+          <button
+            className="button primary publish-button"
+            onClick={startPublish}
+            disabled={busy}
+          >
+            <Send size={18} /> Publish
+          </button>
         </div>
       </div>
+      {notLive && (
+        <div className="publish-banner" role="status">
+          <div>
+            <strong>
+              {dirty
+                ? "You have changes that aren't live yet."
+                : "This draft isn't live yet."}
+            </strong>
+            <span>
+              {launched
+                ? "The congregation still sees the last published bulletin."
+                : "Invited testers still see the last published bulletin."}
+            </span>
+          </div>
+          <button
+            className="button primary publish-button"
+            onClick={startPublish}
+            disabled={busy}
+          >
+            <Send size={18} /> Publish now
+          </button>
+        </div>
+      )}
       <div className="editor-status">
         <span>
           {dirty ? (
@@ -219,13 +258,6 @@ export default function Editor({ data }: { data: WorkspaceData }) {
           Revision {revision} <span className="small-divider" />{" "}
           {draft.sampleData ? "Sample data" : "Church content"}
         </span>
-        <button
-          className="text-button"
-          onClick={() => setPublishing(true)}
-          disabled={busy || dirty}
-        >
-          <Send size={14} /> Publish saved draft
-        </button>
       </div>
       {errors.length > 0 && (
         <div className="validation-errors" role="alert">
@@ -602,15 +634,15 @@ export default function Editor({ data }: { data: WorkspaceData }) {
             </div>
           )}
           <button
-            className="button primary wide"
-            onClick={() => setPublishing(true)}
-            disabled={busy || dirty}
+            className="button primary wide publish-button"
+            onClick={startPublish}
+            disabled={busy}
           >
-            <Send size={16} /> Publish saved draft
+            <Send size={18} /> Publish
           </button>
           {dirty && (
             <p className="fine-print center">
-              Save your changes before publishing.
+              Publishing saves your changes first.
             </p>
           )}
         </aside>

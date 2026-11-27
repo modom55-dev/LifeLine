@@ -3850,3 +3850,296 @@ textarea {
     margin: -8px -8px 0 0;
   }
 }
+
+/* ══ Member view, bold modern look (Nov 2026) ══════════════════════════
+   Inspired by large-church apps: black hero, heavy uppercase headlines,
+   pill buttons, roomy rounded cards. Keeps WholeLife sky blue + orange.   */
+@media screen {
+  .member-page {
+    --ink: #0a0c10;
+    --display: "Montserrat Variable", "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    --text: "Inter Variable", "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--text);
+    background: #fff;
+    color: var(--ink);
+  }
+  /* Header: black bar */
+  .member-page .member-header {
+    background: var(--ink);
+    border-bottom: 0;
+    position: relative;
+  }
+  .member-page .member-header::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 3px;
+    background: var(--brand-stripe);
+  }
+  .member-page .member-header .brand,
+  .member-page .member-header .wordmark,
+  .member-page .member-header .brand-tagline,
+  .member-page .member-header .brand-byline,
+  .member-page .member-header-actions .text-button {
+    color: #fff;
+  }
+  .member-page .member-header .brand-tagline,
+  .member-page .member-header .brand-byline { opacity: 0.75; }
+  .member-page .member-header .lifeline-church-logo {
+    background: #fff;
+    border-radius: 12px;
+  }
+  .member-page .member-header .pilot-chip {
+    background: transparent;
+    color: var(--sky);
+    border-color: var(--sky);
+  }
+  .member-page .member-main { max-width: 920px; }
+
+  /* Type */
+  .member-page h1,
+  .member-page h2,
+  .member-page h3,
+  .member-page .bulletin-footer {
+    font-family: var(--display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .member-page .document-section h2,
+  .member-page .notes-section h2,
+  .member-page .connection-heading h2,
+  .member-page .connection-done h2,
+  .member-page .member-links h3 {
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+  .member-page .eyebrow {
+    font-family: var(--display);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--ember-text);
+  }
+
+  /* Buttons: bold pills */
+  .member-page .button {
+    border-radius: 999px;
+    font-family: var(--display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .member-page .button.primary {
+    background: var(--ember);
+    border-color: var(--ember);
+    color: #fff;
+  }
+  .member-page .button.primary:hover { background: #d9561a; }
+  .member-page .button.secondary {
+    background: #fff;
+    border: 2px solid var(--ink);
+    color: var(--ink);
+  }
+
+  /* Hero: church intro + this week's message as one black card */
+  .member-page .bulletin-document { background: transparent; border: 0; box-shadow: none; padding: 0; }
+  .member-page .bulletin-intro,
+  .member-page .sermon-section {
+    background: var(--ink);
+    color: #fff;
+    margin: 0;
+    border: 0;
+  }
+  .member-page .bulletin-intro {
+    border-radius: 28px 28px 0 0;
+    padding: 44px 32px 8px;
+    background:
+      radial-gradient(120% 90% at 50% 0%, #30c6f333 0%, transparent 60%),
+      var(--ink);
+  }
+  .member-page .bulletin-intro .bulletin-church-logo {
+    background: #fff;
+    border-radius: 18px;
+  }
+  .member-page .bulletin-intro > .eyebrow,
+  .member-page .sermon-section > .eyebrow { color: var(--sky); }
+  .member-page .bulletin-intro h1 {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: clamp(30px, 6vw, 52px);
+    line-height: 1.02;
+  }
+  .member-page .bulletin-intro > p,
+  .member-page .bulletin-contact,
+  .member-page .bulletin-contact a,
+  .member-page .bulletin-intro .church-contact,
+  .member-page .bulletin-intro .church-contact a,
+  .member-page .bulletin-date { color: #c9d3da; }
+  .member-page .sermon-section {
+    border-radius: 0 0 28px 28px;
+    padding: 28px 32px 48px;
+    border-top: 1px solid #ffffff1f;
+  }
+  .member-page .sermon-section h2 {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: clamp(38px, 8vw, 72px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+  .member-page .scripture-reference {
+    color: var(--ember);
+    font-family: var(--display);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .member-page .speaker { color: #c9d3da; }
+  .member-page .sermon-summary { color: #e8edf0; }
+
+  /* Sections */
+  .member-page .document-section { margin-top: 56px; border: 0; }
+  .member-page .document-section h2 { font-size: clamp(30px, 5vw, 44px); }
+  .member-page .section-heading { border-bottom: 3px solid var(--ink); padding-bottom: 12px; }
+  .member-page .announcement,
+  .member-page .event {
+    background: #f3f6f8;
+    border: 0;
+    border-radius: 20px;
+    padding: 22px 22px;
+    margin-top: 14px;
+  }
+  .member-page .announcement h3,
+  .member-page .event h3 { font-size: 22px; line-height: 1.2; color: var(--ink); }
+  .member-page .announcement p,
+  .member-page .event p { color: #3a4650; }
+  .member-page .announcement-index {
+    font-family: var(--display);
+    font-weight: 800;
+    color: var(--sky-deep);
+  }
+  .member-page .event-date {
+    background: var(--ink);
+    color: #fff;
+    border: 0;
+    border-radius: 14px;
+  }
+  .member-page .event-date span { color: var(--sky); font-family: var(--display); font-weight: 700; }
+  .member-page .event-date strong { color: #fff; font-family: var(--display); font-weight: 800; }
+  .member-page .event .event-meta { color: var(--ember-text); font-weight: 600; }
+
+  /* Give / Watch: big bold tiles */
+  .member-page .member-links { gap: 14px; margin-top: 40px; }
+  .member-page .member-links > div {
+    border: 0;
+    border-radius: 24px;
+    padding: 28px;
+    color: #fff;
+    background: var(--ink);
+  }
+  .member-page .member-links > div:first-child {
+    background: linear-gradient(135deg, #f46921 0%, #c94f17 100%);
+  }
+  .member-page .member-links > div:last-child {
+    background: linear-gradient(135deg, #30c6f3 0%, #0f8fbf 100%);
+  }
+  .member-page .member-links h3,
+  .member-page .member-links p,
+  .member-page .member-links svg { color: #fff; }
+  .member-page .member-links .text-button {
+    color: var(--ink);
+    background: #fff;
+    border-radius: 999px;
+    padding: 0 20px;
+    min-height: 46px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 12px;
+    text-decoration: none;
+  }
+
+  /* Notes + Connection Card */
+  .member-page .notes-section,
+  .member-page .connection-card {
+    border: 0;
+    border-radius: 24px;
+    background: #f3f6f8;
+    box-shadow: none;
+  }
+  .member-page .connection-card { border-top: 0; margin-top: 40px; }
+  .member-page .connection-icon { background: var(--ink); color: var(--sky); }
+  .member-page .interest-chips button {
+    border-radius: 999px;
+    border: 2px solid #cfd8de;
+    background: #fff;
+    font-weight: 600;
+  }
+  .member-page .interest-chips button[aria-pressed="true"],
+  .member-page .interest-chips button.selected {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+  }
+  .member-page input,
+  .member-page textarea {
+    border-radius: 14px;
+    border: 2px solid #d6dee3;
+    background: #fff;
+  }
+  .member-page input:focus,
+  .member-page textarea:focus {
+    border-color: var(--sky);
+    outline: 3px solid #30c6f340;
+  }
+
+  .member-page .bulletin-footer { color: var(--ink); text-transform: uppercase; }
+  .member-page .member-page-footer { background: var(--ink); color: #9fb0bb; border-top: 0; }
+
+  /* Bottom bar goes black like the header */
+  .member-page .mobile-action-bar {
+    background: var(--ink);
+    border-top: 3px solid var(--sky);
+  }
+  .member-page .mobile-action-bar a {
+    color: #fff;
+    font-family: var(--display);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 12px;
+  }
+  .member-page .mobile-action-bar a svg { color: var(--sky); }
+  .member-page .mobile-action-bar a:first-child svg { color: var(--ember); }
+  .member-page .mobile-action-bar a:active { background: #ffffff14; }
+}
+@media screen and (max-width: 720px) {
+  .member-page .bulletin-intro { padding: 34px 20px 6px; border-radius: 22px 22px 0 0; }
+  .member-page .sermon-section { padding: 22px 20px 36px; border-radius: 0 0 22px 22px; }
+  .member-page .member-links > div { padding: 24px; }
+}
+
+/* ══ Publish: make it impossible to miss ═══════════════════════════════ */
+.publish-button {
+  min-height: 46px;
+  padding: 0 24px;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 6px 16px #f4692140;
+}
+.publish-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  background: #fff1e8;
+  border: 2px solid #f46921;
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin: 0 0 22px;
+}
+.publish-banner strong { display: block; font-size: 16px; color: var(--navy); }
+.publish-banner span { font-size: 14px; color: #5b6a73; }

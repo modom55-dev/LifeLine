@@ -69,6 +69,21 @@ function Overview({ data: d, launched }: { data: WorkspaceData; launched: boolea
           <FileText size={17} /> Edit bulletin <ArrowRight size={16} />
         </Link>
       </div>
+      {hasDraftChanges && (
+        <div className="publish-banner" role="status">
+          <div>
+            <strong>“{d.draft.sermonTitle}” is ready but not live yet.</strong>
+            <span>
+              {launched
+                ? "The congregation still sees the last published bulletin."
+                : "Invited testers still see the last published bulletin."}
+            </span>
+          </div>
+          <Link href="/admin/editor" className="button primary publish-button">
+            Review &amp; publish <ArrowRight size={18} />
+          </Link>
+        </div>
+      )}
       <div className="overview-grid">
         <div className="overview-left">
           <div className="sunday-card">

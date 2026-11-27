@@ -5,6 +5,8 @@ import { httpBatchLink } from "@trpc/client";
 import { createRoot } from "react-dom/client";
 import superjson from "superjson";
 import App from "./App";
+import "@fontsource-variable/montserrat";
+import "@fontsource-variable/inter";
 import "./index.css";
 
 const queryClient = new QueryClient({
