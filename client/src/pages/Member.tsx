@@ -1,11 +1,10 @@
-import { Printer, ArrowLeft, LockKeyhole, LogOut, HeartHandshake } from "lucide-react";
-import { useLocation } from "wouter";
+import { ArrowLeft, LockKeyhole, LogOut, HeartHandshake, Newspaper } from "lucide-react";
+import { Link, useLocation } from "wouter";
 import ChurchReference from "@/components/ChurchReference";
 import Brand from "@/components/Brand";
 import BulletinView from "@/components/BulletinView";
 import ConnectionCardForm from "@/components/ConnectionCardForm";
 import { MobileActionBar, HomeScreenTip } from "@/components/MobileBar";
-import { NewsletterButton } from "@/components/Actions";
 import { trpc } from "@/lib/trpc";
 import Access, { LoadingState, ErrorState } from "./Access";
 
@@ -73,15 +72,9 @@ export default function Member() {
             <HomeScreenTip />
             <div className="member-toolbar no-print">
               <span className="eyebrow">YOUR WEEKLY BULLETIN</span>
-              <div className="button-row">
-                <button
-                  className="button secondary"
-                  onClick={() => window.print()}
-                >
-                  <Printer size={16} /> Print bulletin
-                </button>
-                <NewsletterButton bulletin={d.bulletin} church={d.church} />
-              </div>
+              <Link href="/c/wholelife/newsletter" className="button primary newsletter-open">
+                <Newspaper size={18} /> Read the newsletter
+              </Link>
             </div>
             <BulletinView bulletin={d.bulletin} church={d.church} notes />
             <ConnectionCardForm />
