@@ -9,6 +9,8 @@ import {
   Trash2,
   HeartHandshake,
   Video,
+  Quote,
+  ArrowRight,
 } from "lucide-react";
 import { formatDate, type Bulletin, type ChurchInfo } from "@shared/bulletin";
 import { Modal } from "./Actions";
@@ -109,6 +111,23 @@ export function LocalNotes({
     </section>
   );
 }
+function AnnouncementLink({ url, text }: { url: string; text?: string }) {
+  let sameSite = false;
+  try {
+    sameSite = new URL(url).origin === window.location.origin;
+  } catch {
+    return null;
+  }
+  return (
+    <a
+      className="announcement-link"
+      href={url}
+      {...(sameSite ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+    >
+      {text || "Learn more"} <ArrowRight size={16} />
+    </a>
+  );
+}
 export default function BulletinView({
   bulletin: b,
   church,
@@ -150,6 +169,17 @@ export default function BulletinView({
         {b.speaker && <p className="speaker">With {b.speaker}</p>}
         {b.sermonSummary && <p className="sermon-summary">{b.sermonSummary}</p>}
       </section>
+      {b.quote && (
+        <figure className="bishop-quote">
+          <Quote size={34} aria-hidden />
+          <span className="eyebrow">A WORD FROM THE BISHOP</span>
+          <blockquote>{b.quote}</blockquote>
+          <figcaption>
+            Bishop Michael H. Odom, Sr.
+            {b.quoteSource && <cite>{b.quoteSource}</cite>}
+          </figcaption>
+        </figure>
+      )}
       <section className="document-section">
         <div className="section-heading">
           <h2>Life in our community</h2>
@@ -164,6 +194,7 @@ export default function BulletinView({
               <div>
                 <h3>{a.title}</h3>
                 <p>{a.body}</p>
+                {a.linkUrl && <AnnouncementLink url={a.linkUrl} text={a.linkText} />}
               </div>
             </div>
           ))

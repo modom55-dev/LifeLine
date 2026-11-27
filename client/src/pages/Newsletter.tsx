@@ -80,6 +80,16 @@ export default function Newsletter() {
           {b.sermonSummary && <p className="nl-summary">{b.sermonSummary}</p>}
         </section>
 
+        {b.quote && (
+          <figure className="nl-quote">
+            <span className="nl-label">A word from the Bishop</span>
+            <blockquote>“{b.quote}”</blockquote>
+            <figcaption>
+              Bishop Michael H. Odom, Sr.{b.quoteSource ? ` · ${b.quoteSource}` : ""}
+            </figcaption>
+          </figure>
+        )}
+
         {(b.givingUrl || b.livestreamUrl) && (
           <div className="nl-cta">
             {b.livestreamUrl && (
@@ -107,6 +117,11 @@ export default function Newsletter() {
                   .map((p, i) => (
                     <p key={i}>{p}</p>
                   ))}
+                {a.linkUrl && (
+                  <a className="nl-link" href={a.linkUrl}>
+                    {a.linkText || "Learn more"} →
+                  </a>
+                )}
               </div>
             ))}
           </section>

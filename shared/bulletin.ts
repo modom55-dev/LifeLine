@@ -34,12 +34,18 @@ export const bulletinSchema = z.object({
     .max(180),
   speaker: z.string().trim().max(120),
   sermonSummary: z.string().trim().max(2000),
+  /** Weekly quote from the Bishop (from his books). */
+  quote: z.string().trim().max(600).optional(),
+  quoteSource: z.string().trim().max(120).optional(),
   announcements: z
     .array(
       z.object({
         id: z.string().max(64),
         title: z.string().trim().min(1).max(160),
         body: z.string().trim().max(2000),
+        /** Optional clickable text link under the announcement. */
+        linkUrl: safeUrl.optional(),
+        linkText: z.string().trim().max(80).optional(),
       })
     )
     .max(30),
@@ -146,8 +152,19 @@ export function newsletter(b: Bulletin, church: ChurchInfo) {
     b.speaker ? `Speaker: ${b.speaker}` : "",
     b.sermonSummary,
     "",
+    ...(b.quote
+      ? [
+          "A WORD FROM THE BISHOP",
+          `"${b.quote}"`,
+          `— Bishop Michael H. Odom, Sr.${b.quoteSource ? `, ${b.quoteSource}` : ""}`,
+          "",
+        ]
+      : []),
     "ANNOUNCEMENTS",
-    ...b.announcements.map(a => `${a.title}\n${a.body}\n`),
+    ...b.announcements.map(
+      a =>
+        `${a.title}\n${a.body}\n${a.linkUrl ? `${a.linkText || "Learn more"}: ${a.linkUrl}\n` : ""}`
+    ),
     "UPCOMING EVENTS",
     ...b.events.map(
       e =>

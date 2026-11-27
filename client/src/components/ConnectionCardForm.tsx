@@ -22,8 +22,19 @@ const empty = {
   website: "",
 };
 
+function initialForm() {
+  try {
+    const want = new URLSearchParams(window.location.search).get("interest");
+    if (want === "home")
+      return { ...empty, interests: ["Making WholeLife my home"] as Interest[] };
+  } catch {
+    /* ignore */
+  }
+  return empty;
+}
+
 export default function ConnectionCardForm() {
-  const [form, setForm] = useState(empty);
+  const [form, setForm] = useState(initialForm);
   const [error, setError] = useState("");
   const submit = trpc.connect.submit.useMutation({
     onSuccess: () => {

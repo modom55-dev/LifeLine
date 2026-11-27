@@ -60,6 +60,32 @@ const clip = (v: string, max: number) => (v.length > max ? v.slice(0, max - 1).t
 
 export class SheetImportError extends Error {}
 
+const quoteKey = (service: Record<string, string>) =>
+  Object.keys(service).find(k => k.includes("quote") && !k.includes("from") && !k.includes("source")) ?? "";
+const sourceKey = (service: Record<string, string>) =>
+  Object.keys(service).find(k => k.includes("quote") && (k.includes("from") || k.includes("source"))) ?? "";
+const stripQuotes = (v: string) => v.replace(/^["“”']+|["“”']+$/g, "").trim();
+
+/** Rows of the "Quote Library" tab: quote in column A, book in column B (header row skipped). */
+export function quotesFromRows(rows: string[][]) {
+  // Google returns the first tab when a tab name is missing, so insist on the library's own header.
+  const header = rows.findIndex(r => clean(r[0]).toLowerCase() === "quote");
+  if (header < 0) return [];
+  return rows
+    .slice(header + 1)
+    .map(r => ({ quote: stripQuotes(clean(r[0])), source: clean(r[1]) }))
+    .filter(r => r.quote.length > 8);
+}
+
+/** Same quote all week; moves to the next one each Sunday. */
+export function quoteForWeek<T>(quotes: T[], serviceDate: string): T | undefined {
+  if (!quotes.length) return undefined;
+  const weeks = Math.floor(
+    (Date.parse(`${serviceDate}T12:00:00Z`) - Date.parse("2026-01-04T12:00:00Z")) / (7 * 864e5)
+  );
+  return quotes[((weeks % quotes.length) + quotes.length) % quotes.length];
+}
+
 /** Turns the rows of one weekly tab into a bulletin. Throws SheetImportError with a plain-language reason. */
 export function bulletinFromRows(rows: string[][], expectedDate: string): Bulletin {
   const service: Record<string, string> = {};
@@ -84,12 +110,16 @@ export function bulletinFromRows(rows: string[][], expectedDate: string): Bullet
       continue;
     }
     if (section === "service" && a) service[label] = b;
+    if (section === "announcements" && a && c && !/^https:\/\//i.test(c) && label !== "title")
+      skipped.push(`${a} link (must start with https://)`);
     if (section === "announcements" && a && !(label === "title" && b.toLowerCase() === "details")) {
       if (announcements.length < 30)
         announcements.push({
           id: `sheet-a${announcements.length + 1}`,
           title: clip(a, 160),
           body: clip(b, 2000),
+          linkUrl: /^https:\/\//i.test(c) ? c : "",
+          linkText: clip(d, 80),
         });
     }
     if (section === "events" && a && label !== "event") {
@@ -122,6 +152,8 @@ export function bulletinFromRows(rows: string[][], expectedDate: string): Bullet
     scripture: clip(service["scripture"] ?? "", 180),
     speaker: clip(service["speaker"] ?? "", 120),
     sermonSummary: clip(service["sermon summary"] ?? "", 2000),
+    quote: clip(stripQuotes(service[quoteKey(service)] ?? ""), 600),
+    quoteSource: clip(service[sourceKey(service)] ?? "", 120),
     announcements,
     events,
     givingUrl: service["giving link"] ?? "",
@@ -151,5 +183,23 @@ export async function loadWeekFromSheet(date = upcomingSunday()) {
   const bulletin = bulletinFromRows(parseCsv(await response.text()), date);
   const skipped = (bulletin as Bulletin & { __skipped?: string[] }).__skipped ?? [];
   delete (bulletin as Bulletin & { __skipped?: string[] }).__skipped;
+  if (!bulletin.quote) {
+    // No quote typed for this week: rotate through the Quote Library tab.
+    try {
+      const libraryUrl = `https://docs.google.com/spreadsheets/d/${encodeURIComponent(
+        teamSheetId()
+      )}/gviz/tq?tqx=out:csv&headers=0&sheet=${encodeURIComponent("Quote Library")}`;
+      const lib = await fetch(libraryUrl, { signal: AbortSignal.timeout(15000), redirect: "follow" });
+      if (lib.ok && (lib.headers.get("content-type") ?? "").includes("csv")) {
+        const pick = quoteForWeek(quotesFromRows(parseCsv(await lib.text())), date);
+        if (pick) {
+          bulletin.quote = clip(pick.quote, 600);
+          bulletin.quoteSource = clip(pick.source, 120);
+        }
+      }
+    } catch {
+      /* a missing library never blocks the bulletin */
+    }
+  }
   return { bulletin, tab, skipped };
 }

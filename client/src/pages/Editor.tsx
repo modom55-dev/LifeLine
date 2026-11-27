@@ -352,6 +352,25 @@ export default function Editor({ data }: { data: WorkspaceData }) {
                 rows={4}
               />
             </label>
+            <label>
+              A word from the Bishop <span className="optional">Optional</span>
+              <textarea
+                value={draft.quote ?? ""}
+                onChange={e => update("quote", e.target.value)}
+                maxLength={600}
+                rows={3}
+                placeholder="Leave blank and LifeLine picks the next quote from the Quote Library tab."
+              />
+            </label>
+            <label>
+              Quote from <span className="optional">Book title</span>
+              <input
+                value={draft.quoteSource ?? ""}
+                onChange={e => update("quoteSource", e.target.value)}
+                maxLength={120}
+                placeholder="The Becoming of You"
+              />
+            </label>
           </section>
           <section className="form-card">
             <div className="form-card-heading">
@@ -407,6 +426,40 @@ export default function Editor({ data }: { data: WorkspaceData }) {
                     maxLength={2000}
                   />
                 </label>
+                <div className="form-grid">
+                  <label>
+                    Link <span className="optional">Optional, https://</span>
+                    <input
+                      value={a.linkUrl ?? ""}
+                      onChange={e =>
+                        update(
+                          "announcements",
+                          draft.announcements.map((x, n) =>
+                            n === i ? { ...x, linkUrl: e.target.value } : x
+                          )
+                        )
+                      }
+                      maxLength={2048}
+                      inputMode="url"
+                    />
+                  </label>
+                  <label>
+                    Link text <span className="optional">Optional</span>
+                    <input
+                      value={a.linkText ?? ""}
+                      onChange={e =>
+                        update(
+                          "announcements",
+                          draft.announcements.map((x, n) =>
+                            n === i ? { ...x, linkText: e.target.value } : x
+                          )
+                        )
+                      }
+                      maxLength={80}
+                      placeholder="Learn more"
+                    />
+                  </label>
+                </div>
               </div>
             ))}
             <button

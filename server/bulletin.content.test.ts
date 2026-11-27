@@ -49,3 +49,36 @@ describe("bulletin content", () => {
     expect(text.match(/https:\/\//g)).toHaveLength(1);
   });
 });
+
+import { bulletinFromRows, quotesFromRows, quoteForWeek } from "./sheetImport";
+
+describe("weekly quote and announcement links from the team sheet", () => {
+  const rows = [
+    ["SERVICE"],
+    ["Service date", "2026-12-06"],
+    ["Sermon title", "Test"],
+    ["Scripture", "John 3:16"],
+    ["Bishop's quote", "“Being unseen is not the same as being unworthy.”"],
+    ["Quote from (book)", "The Becoming of You"],
+    ["ANNOUNCEMENTS"],
+    ["Title", "Details", "Link (optional)", "Link text (optional)"],
+    ["Make WholeLife Your Home", "Join us.", "https://example.org/home", "I'm ready"],
+    ["Bad link", "x", "http://insecure.example", ""],
+  ];
+  it("reads the quote, its book, and https links", () => {
+    const b = bulletinFromRows(rows, "2026-12-06");
+    expect(b.quote).toBe("Being unseen is not the same as being unworthy.");
+    expect(b.quoteSource).toBe("The Becoming of You");
+    expect(b.announcements[0]).toMatchObject({ linkUrl: "https://example.org/home", linkText: "I'm ready" });
+    expect(b.announcements[1].linkUrl).toBe("");
+  });
+  it("only trusts a real Quote Library tab and rotates weekly", () => {
+    expect(quotesFromRows(rows)).toEqual([]);
+    const lib = quotesFromRows([["Quote", "Book"], ["First quote here", "A"], ["Second quote here", "B"]]);
+    expect(lib).toHaveLength(2);
+    const a = quoteForWeek(lib, "2026-12-06");
+    const b = quoteForWeek(lib, "2026-12-13");
+    expect(a).not.toEqual(b);
+    expect(quoteForWeek(lib, "2026-12-20")).toEqual(a);
+  });
+});
