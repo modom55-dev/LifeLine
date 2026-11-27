@@ -71,7 +71,7 @@ describe("team sheet import", () => {
     expect(b.livestreamUrl).toBe("https://www.youtube.com/@Wholelifechurch");
     expect(b.sampleData).toBe(false);
     expect(b.announcements).toEqual([
-      { id: "sheet-a1", title: "Coats & Cocoa", body: 'Line one, with a comma.\nLine two "quoted".' },
+      { id: "sheet-a1", title: "Coats & Cocoa", body: 'Line one, with a comma.\nLine two "quoted".', linkUrl: "", linkText: "" },
     ]);
     expect(b.events).toHaveLength(1);
     expect(b.events[0]).toMatchObject({ date: "2026-12-05", location: "Center City Mall" });
